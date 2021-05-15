@@ -1,6 +1,6 @@
 figure.autolayout: True # Automatic figure layout
 figure.subplot.left  : 0.5
-figure.dpi : 300
+figure.dpi : 600
 savefig.bbox : tight # Always save as 'tight'
 savefig.pad_inches : 0.04
 
