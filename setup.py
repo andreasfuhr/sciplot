@@ -10,5 +10,5 @@ setup(
     author_email='andreas.fuhr@outlook.com',
     description='Neatly format Matplotlib scientific plots',
     python_requires='>=3.4',
-    install_requires=['matplotlib', 'pyyaml', 'seaborn'],
+    install_requires=['matplotlib>=3.3.4', 'pyyaml', 'seaborn'],
 )
