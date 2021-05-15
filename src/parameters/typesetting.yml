@@ -1,0 +1,22 @@
+# Title
+figure.titlesize: 10
+figure.titleweight: bold
+axes.titlesize: 9 # Title font size
+axes.titleweight: normal # Title font weight
+
+# Axes
+axes.labelsize: 9 # x and y labels font size
+axes.labelweight: normal # x and y labels font weight
+axes.grid: False # Grid turned off
+
+# Ticks
+xtick.labelsize: 7 # x ticks font size
+ytick.labelsize: 7 # y ticks font size
+xtick.major.size : 3
+ytick.major.size : 3
+xtick.minor.size : 1.5
+ytick.minor.size : 1.5
+
+# Legend
+legend.fontsize: 6 # Legend font size
+legend.edgecolor: grey
