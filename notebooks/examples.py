@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from pathlib import Path
 
-import sciplot
+import sys
+sys.path.append('../')
+import sciplot.main as sciplot
 
 # Plot 1
 with sciplot.style():
@@ -39,14 +41,14 @@ with sciplot.style():
 
     sciplot.save_time_stamped_figure(
         plot_file_name='Line_plot',
-        save_directory=(Path(__file__).parent / 'example_plots')
+        save_directory=(Path(__file__).parent / '..' / 'example_plots')
     )
 
     plt.show()
 
 
 # Plot 2
-with sciplot.style(font_style='serif'):
+with sciplot.style(theme='dark', font_style='serif'):
     np.random.seed(42)
     n = 10000
     mean_ar = np.array([4.5, 6.1, 8.3])
@@ -64,7 +66,7 @@ with sciplot.style(font_style='serif'):
 
 
     plot_lst = []
-    color_lst = sciplot.get_color_lst(len(data_ar), seaborn_color_map='rocket', include_black=False)
+    color_lst = sciplot.get_color_lst(len(data_ar), seaborn_color_map='rocket', colorful=False)
 
     for i, data in enumerate(data_ar):
         ax.hist(data, density=True, bins=100, alpha=0.7, color=color_lst[i])
@@ -87,7 +89,7 @@ with sciplot.style(font_style='serif'):
 
     sciplot.save_time_stamped_figure(
         plot_file_name='Histogram_plot',
-        save_directory=(Path(__file__).parent / 'example_plots')
+        save_directory=(Path(__file__).parent / '..' / 'example_plots')
     )
 
     plt.show()
