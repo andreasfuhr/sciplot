@@ -10,10 +10,14 @@ The neat-sciplots package was developed by [Andreas Führ](https://www.linkedin.
 
 ## Getting started
 ```
+# to install the lastest release (from PyPI)
 pip install neat-sciplots
+
+# to install the latest commit (from GitHub)
+pip install git+https://github.com/andreasfuhr/neat-sciplots.git
 ```
 
-Formatting plots in Matplotlib is based on a functional `with`-statement context
+Formatting plots in Matplotlib is based on a functional `with`-statement context. A MWE:
 ```python
 import matplotlib.pyplot as plt
 import sciplot
@@ -24,8 +28,9 @@ with sciplot.style():
     plt.plot(x, y)
     plt.show()
 ```
+If a LaTeX distribution is not available, `use_latex=False` must be passed as an argument to `sciplot.style()`.
 
-`use_latex=False` as an argument to `sciplot.style()`
+
 ## Overview
 
 ### Key Features:
