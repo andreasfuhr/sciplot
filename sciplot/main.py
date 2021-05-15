@@ -19,6 +19,9 @@ import yaml
 # Disable "findfont: Font family ['serif'] not found. Falling back to DejaVu Sans."
 logging.getLogger('matplotlib.font_manager').disabled = True
 
+# Dark mode boolean operator
+dark_mode = False
+
 # neat-sciplots exception class
 class NeatSciplotsException(Exception):
     pass
@@ -29,8 +32,9 @@ def get_paramters_dir() -> str:
 
 
 def get_parameters_lst(
-        font_style: str,
-        use_latex: bool
+        use_latex: bool,
+        theme: str,
+        font_style: str
 ) -> List[object]:
     # Empty list of parameters
     parameters_lst = []
@@ -49,13 +53,13 @@ def get_parameters_lst(
 
     # Import color parameters
     try:
-        parameters_path = parameters_dir / 'colors.yml'
+        parameters_path = parameters_dir / ('colors_' + theme + '.yml')
         with parameters_path.open() as setup_file:
             parameters = yaml.safe_load(setup_file.read())
 
         parameters_lst.append(parameters)
     except FileNotFoundError:
-        raise NeatSciplotsException('Could not import typesetting parameters')
+        raise NeatSciplotsException("No such theme: '" + theme + "'")
 
     # Import typesetting parameters
     try:
@@ -102,18 +106,24 @@ def style(
     locale.setlocale(locale.LC_NUMERIC, locale_setting)
 
     if theme == 'dark':
-        plt.style.use('dark-background')
+        plt.style.use('dark_background')
+        global dark_mode
+        dark_mode = True
     else:
         pass
 
     parameters_lst = get_parameters_lst(
-        font_style=font_style,
-        use_latex=use_latex
+        use_latex=use_latex,
+        theme=theme,
+        font_style=font_style
     )
     for parameters in parameters_lst:
         plt.rcParams.update(parameters)
 
     yield
+
+    plt.style.use('default')
+    dark_mode = False
 
 
 def set_size_cm(
@@ -174,14 +184,18 @@ def set_legend(
 def get_color_lst(
         color_no: int,
         seaborn_color_map: str = 'cubehelix',
-        include_black: bool = False
+        colorful: bool = False
 ) -> List[str]:
-    if color_no > 4 and not include_black:
+    if color_no > 4 and colorful:
         color_lst = sns.color_palette(seaborn_color_map, color_no).as_hex()
-    elif color_no == 1:
-        color_lst = ['000000']
+    elif color_no == 1 and not dark_mode:
+        color_lst = ['#000000']
+    elif color_no == 1 and dark_mode:
+        color_lst = ['#FFFFFF']
+    elif not colorful and dark_mode:
+        color_lst = sns.color_palette(seaborn_color_map, color_no).as_hex()[:-1] + ['#FFFFFF']
     else:
-        color_lst = ['000000'] + sns.color_palette(seaborn_color_map, color_no).as_hex()[:-1]
+        color_lst = ['#000000'] + sns.color_palette(seaborn_color_map, color_no).as_hex()[:-1]
 
     return color_lst
 
