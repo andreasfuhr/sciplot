@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from pathlib import Path
 
-import src.main as sciplot
+import sciplot.main as sciplot
 
 # Plot 1
 with sciplot.style():
