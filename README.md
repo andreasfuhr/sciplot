@@ -5,19 +5,24 @@
 user-friendly, yet highly customizable way.
 It makes typesetting in LaTeX possible and comes with several methods that makes plotting more 
 straightforward and less cluttered, without sacrificing full control over plot settings.
+An example of a plot created with neat-sciplots is shown below.
+
+![example image](./example_plots/Line_plot_2021-05-15T19.03.png)
 
 The neat-sciplots package was developed by [Andreas Führ](https://www.linkedin.com/in/fuhrandreas/) in May 2021.
 
-## Getting started
+## Installation and getting started
+To install the latest release from PyPi, execute the following command:
 ```
-# to install the lastest release (from PyPI)
 pip install neat-sciplots
-
-# to install the latest commit (from GitHub)
+```
+To install the latest commit, please use the the following command:
+```
 pip install git+https://github.com/andreasfuhr/neat-sciplots.git
 ```
 
-Formatting plots in Matplotlib is based on a functional `with`-statement context. A MWE:
+<br/><br/>
+Formatting plots in Matplotlib is based on a functional `with`-statement context. A MWE can be demonstrated as follows:
 ```python
 import matplotlib.pyplot as plt
 import sciplot
@@ -58,6 +63,11 @@ some earlier issues with this package.
 
 It should be noted that although this package is in many ways similar to [[1]](#1), which is a highly recommended 
 alternative, neat-sciplots has been independently developed and has a multitude of structural and functional differences.
+
+
+## Using neat-sciplots
+
+TBD
 
 
 ## Citing neat-plots
