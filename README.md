@@ -50,8 +50,8 @@ arguments to alter the look of the plot, such as:
     separator etc.)
 * Implements LaTeX kernel for typesetting plots. A versatile LaTeX preamble is included that is specifically 
 created and optionally editable for mathematics- and physics-oriented papers, theses and presentations. Both the 
-[siunitx](https://ctan.org/pkg/siunitx) and [physics](https://www.ctan.org/pkg/physics) LaTeX packages are included by
-default in the parameter settings.
+[siunitx](https://ctan.org/pkg/siunitx) and [physics](https://www.ctan.org/pkg/physics) LaTeX packages are for example
+included by default in the parameter settings.
 * Easy customization. Most settings have been moved to parameters files, which are imported to the context manager and 
 configured with `matplotlibrc`. The **user is encouraged to edit** these accessible and highly readable YAML parameters
 files, whom can be found with the `sciplot.get_paramters_dir()` method.
