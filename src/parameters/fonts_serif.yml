@@ -1,0 +1,4 @@
+# Fonts
+font.serif: cm # Serif font
+mathtext.fontset: cm # Text in math mode
+font.size: 7 # General font size
