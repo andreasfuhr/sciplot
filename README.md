@@ -89,6 +89,10 @@ what is in the pipeline:
 * Making it possible to choose LaTeX fonts. As of currently, *Computer Modern Roman* and *Computer Modern Roman Sans 
 Serif* are the only two font options for both text and mathematical notation.
 * Test suite for further code development
+* Include example plots in documentation
+* Write instructions on how to use the package
+
+
 ## References
 <a id="1">[1]</a>
 J.D. Garrett and H. Peng,
