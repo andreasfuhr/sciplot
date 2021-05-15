@@ -1,0 +1,36 @@
+figure.autolayout: True # Automatic figure layout
+figure.subplot.left  : 0.5
+figure.dpi : 300
+savefig.bbox : tight # Always save as 'tight'
+savefig.pad_inches : 0.04
+
+
+
+# Linewidths
+axes.linewidth: 0.25 # Border linewidth
+grid.linewidth: 0.25 # Grid linewidth
+xtick.major.width: 0.25 # x ticks major linewidth
+xtick.minor.width: 0.25 # x ticks minor linewidth
+ytick.major.width: 0.25 # y ticks major linewidth
+ytick.minor.width: 0.25 # y ticks minor linewidth
+
+# Plots
+lines.linewidth : 0.5 # Width of plotted lines
+lines.markersize : 2 # Size of plotted markers
+
+# Axes
+axes.formatter.use_locale: True # Use local decimal separator etc.
+
+# Ticks
+xtick.direction : in
+ytick.direction : in
+xtick.minor.visible : True
+ytick.minor.visible : True
+xtick.top : True
+ytick.right : True
+
+# Legend
+patch.linewidth: 0.25
+legend.frameon: True
+legend.fancybox: False
+legend.loc: upper left

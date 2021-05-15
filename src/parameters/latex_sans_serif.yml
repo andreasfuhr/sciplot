@@ -1,0 +1,25 @@
+# TODO: Write description
+text.usetex: true  # Use LaTeX
+
+# LaTeX standard math and physics preamble with sans-serif font in math mode
+text.latex.preamble: >
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+  \usepackage{mathtools}
+  \usepackage{bbm}
+  \usepackage{gensymb}
+  \usepackage[italicdiff]{physics}
+  \usepackage{icomma}
+  \usepackage{sansmath}
+  \sansmath
+  \usepackage{siunitx}
+  \sisetup{
+  locale=DE,
+  detect-all,
+  range-phrase=\text{--},
+  seperr,
+  range-units=single,
+  bracket-unit-denominator=false,
+  sticky-per,
+  per-mode=symbol
+  }

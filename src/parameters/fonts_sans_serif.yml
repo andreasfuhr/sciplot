@@ -1,0 +1,5 @@
+# Fonts
+font.family: sans-serif # Font type
+font.serif: Computer Modern Sans Serif # Sans-serif font
+mathtext.fontset: cm # Text in math mode
+font.size: 7 # General font size
