@@ -7,9 +7,7 @@ It makes typesetting in LaTeX possible and comes with several methods that makes
 straightforward and less cluttered, without sacrificing full control over plot settings.
 An example of a plot created with neat-sciplots is shown below.
 
-<img src="example_plots/Line_plot_2021-05-15T19.03.png" alt="example_plot" width="400"/>
-
-[example image](./example_plots/Line_plot_2021-05-15T19.03.png){ width=50% }
+<img src="example_plots/Line_plot_2021-05-15T19.03.png" alt="example_plot" width="500"/>
 
 The neat-sciplots package was developed by [Andreas Führ](https://www.linkedin.com/in/fuhrandreas/) in May 2021.
 
@@ -36,7 +34,7 @@ with sciplot.style():
     plt.show()
 ```
 If a LaTeX distribution is not available, `use_latex=False` must be passed as an argument to `sciplot.style()`.
-
+For demonstrations of plotting that covers all packages features, see either [`examples.py`](notebooks/examples.py) or [`examples.ipynb`](./notebooks/examples.ipynb) in the [`notebooks`](./notebooks) directory.
 
 ## Overview
 
@@ -59,17 +57,8 @@ consuming.
 some earlier issues with this package. 
 
 
-
-
-
-
 It should be noted that although this package is in many ways similar to [[1]](#1), which is a highly recommended 
 alternative, neat-sciplots has been independently developed and has a multitude of structural and functional differences.
-
-
-## Using neat-sciplots
-
-TBD
 
 
 ## Citing neat-plots
@@ -82,10 +71,7 @@ To cite this Python package, please use the following BibTeX citation:
   title        = {{andreasfuhr/neat-sciplots}},
   month        = may,
   year         = 2021,
-  publisher    = {Zenodo},
-  version      = {0.0.1},
-  doi          = {10.5281/zenodo.4764827},
-  url          = {http://doi.org/10.5281/zenodo.4764827}
+  version      = {0.6.0},
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
