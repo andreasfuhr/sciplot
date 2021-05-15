@@ -43,7 +43,7 @@ with sciplot.sciplot_style():
     ax.set_ylabel(r'$p(x \,|\, x_\mathrm{m}, \alpha)$')
 
     sciplot.save_time_stamped_figure(
-        plot_file_name='Histogram_plot',
+        plot_file_name='Line_plot',
         save_directory=(Path(__file__).parent / 'example_plots')
     )
 
