@@ -1,1 +1,1 @@
-import sciplot.sciplot as sciplot
+__all__ = ['sciplot']
