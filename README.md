@@ -108,14 +108,22 @@ Serif* are the only two font options for both text and mathematical notation.
 
 ### Table of proposed themes:
 
-Name of theme                            | Background color | Font           | Seaborn colormap
-:--------------------------------------- | :--------------- | :------------- | :---------------
-***default***<sup id="a1">[1](#f1)</sup> | white            | CMR Sans Serif | cubehelix
-***dark***                               | black            | -              | -               
-***antique***                            | white            | Garamond       | *TBD*
-***ieee***                               | white            | Arial          | *TBD*
+Name of theme                            | Priority | Background color | Font                         | Seaborn colormap | Figure size
+:--------------------------------------- | :------- | :--------------- | :--------------------------- | :--------------- | :----------
+***default***<sup id="a1">[1](#f1)</sup> | high     | white            | CMR Sans Serif               | cubehelix        | -
+***dark***                               | high     | black            | -                            | -                | -
+***antique***                            | low      | white            | Garamond                     | *TBD*            | -
+***ieee_column***                        | medium   | white            | ?<sup id="a1">[2](#f2)</sup> | *TBD*            | 88 mm<sup id="a1">[3](#f3)</sup>
+***ieee_page***                          | low      | white            | ?<sup id="a1">[2](#f2)</sup> | *TBD*            | 181 mm<sup id="a1">[3](#f3)</sup>
 
-<b id="f1">1</b>: Initialised at start of context
+<b id="f1">1</b>: Initialised at start of context.
+
+<b id="f2">2</b>: One of the following Open Type fonts are suggested to be used: Times New Roman, Helvetica, Arial, 
+Cambria or Symbol [[2]](#2).
+
+<b id="f3">3</b>: See [[2]](#2) for a description of sizes that graphics should be.
+
+
 ## References
 <a id="1">[1]</a>
 J.D. Garrett and H. Peng,
@@ -124,4 +132,13 @@ ver. 1.0.7.
 Zenodo,
 Feb. 2021.
 \[Online].
-DOI: [10.5281/zenodo.4106649](http://doi.org/10.5281/zenodo.4106649)
+doi: [10.5281/zenodo.4106649](http://doi.org/10.5281/zenodo.4106649)
+
+<a id="2">[2]</a>
+"Preparation of papers for IEEE Transactions and Journals (December 2013),"
+in IEEE Transactions on Consumer Electronics,
+vol. 63,
+no. 1,
+pp. c3-c3,
+February 2017,
+doi: [10.1109/TCE.2017.7932035](http://doi.org/10.1109/TCE.2017.7932035)
