@@ -37,8 +37,7 @@ with sciplot.style():
     plt.show()
 ```
 If a LaTeX distribution is not available, `use_latex=False` must be passed as an argument to `sciplot.style()`.
-For demonstrations of plotting that covers all packages features, see either [`examples.py`](notebooks/examples.py) 
-or [`examples.ipynb`](./notebooks/examples.ipynb) in the [`notebooks`](./notebooks) directory.
+For demonstrations of plotting that covers all packages features, see either [`examples.py`](notebooks/examples.py) in the [`notebooks`](./notebooks) directory.
 
 ## Overview
 
