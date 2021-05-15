@@ -1,1 +1,1 @@
-import sciplot.main
+import sciplot.main as sciplot
