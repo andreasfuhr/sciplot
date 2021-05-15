@@ -1,5 +1,6 @@
 import contextlib
 import locale
+import logging
 import os
 import re
 from datetime import datetime
@@ -12,9 +13,19 @@ import seaborn as sns
 import yaml
 
 
+# Reset Matplotlib style library (use in case of unresolved errors)
+#plt.style.reload_library()
+
+# Disable "findfont: Font family ['serif'] not found. Falling back to DejaVu Sans."
+logging.getLogger('matplotlib.font_manager').disabled = True
+
 # neat-sciplots exception class
 class NeatSciplotsException(Exception):
     pass
+
+
+def get_paramters_dir() -> str:
+    return (Path(__file__).parent / 'parameters')
 
 
 def get_parameters_lst(
@@ -24,8 +35,7 @@ def get_parameters_lst(
     # Empty list of parameters
     parameters_lst = []
 
-    # Path to parameter file directory
-    parameters_dir = Path(__file__).parent / 'parameters'
+    parameters_dir = get_paramters_dir()
 
     # Import basic parameters
     try:
@@ -88,20 +98,17 @@ def sciplot_style(
         font_style: str = 'sans_serif',
         locale_setting: str = 'sv_SE.ISO8859-1'
 ):
-    # Reset Matplotlib style library
-    plt.style.reload_library()
-
     # Set locale (to get correct decimal separater etc)
     locale.setlocale(locale.LC_NUMERIC, locale_setting)
 
-    if type == 'dark':
+    if theme == 'dark':
         plt.style.use('dark-background')
     else:
         pass
 
     parameters_lst = get_parameters_lst(
         font_style=font_style,
-        use_latex=True
+        use_latex=use_latex
     )
     for parameters in parameters_lst:
         plt.rcParams.update(parameters)
@@ -131,8 +138,10 @@ def set_legend(
     if outside_plot:
         if 'right' in loc:
             horizontal_anchor = 1.04
+            loc = loc.replace('right', 'left')
         elif 'left' in loc:
             horizontal_anchor = 0.94
+            loc = loc.replace('left', 'right')
         else:
             horizontal_anchor = 0.5
 
