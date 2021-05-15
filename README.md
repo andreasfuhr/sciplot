@@ -67,15 +67,23 @@ To cite this Python package, please use the following BibTeX citation:
   year         = 2021,
   publisher    = {Zenodo},
   version      = {0.0.1},
-  doi          = {10.5281/zenodo.4106649},
-  url          = {http://doi.org/10.5281/zenodo.4106649}
+  doi          = {10.5281/zenodo.4764827},
+  url          = {http://doi.org/10.5281/zenodo.4764827}
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
 thankful for any recognition.
 
 
-## 
+## Future improvements
+
+The package is still in its infancy and is planned to be expanded in features and configurability. Here is a list of 
+what is in the pipeline:
+* Documentation of source code
+* Instructions on how to install a local LaTeX distribution
+* Making it possible to choose LaTeX fonts. As of currently, *Computer Modern Roman* and *Computer Modern Roman Sans 
+Serif* are the only two font options for both text and mathematical notation.
+* Test suite for further code development
 ## References
 <a id="1">[1]</a>
 J.D. Garrett and H. Peng,
