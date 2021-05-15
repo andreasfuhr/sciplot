@@ -5,14 +5,15 @@
 user-friendly, yet highly customizable way.
 It makes typesetting in LaTeX possible and comes with several methods that makes plotting more 
 straightforward and less cluttered, without sacrificing full control over plot settings.
-An example of a plot created with neat-sciplots is shown below.
+Two examples plots created with neat-sciplots is shown below.
 
-<img src="example_plots/Line_plot_2021-05-15T19.03.png" alt="example_plot" width="500"/>
+<img src="example_plots/Line_plot_2021-05-15T22.57.png" alt="example_plot" width="500"/>
+<img src="example_plots/Histogram_plot_2021-05-15T22.57.png" alt="example_plot" width="800"/>
 
 The neat-sciplots package was developed by [Andreas Führ](https://www.linkedin.com/in/fuhrandreas/) in May 2021.
 
 ## Installation and getting started
-To install the latest release from PyPi, execute the following command:
+To install the latest release from PyPI, execute the following command:
 ```
 pip install neat-sciplots
 ```
