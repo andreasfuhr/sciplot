@@ -4,9 +4,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from pathlib import Path
 
-import sys
-sys.path.append('../')
-import sciplot.main as sciplot
+import sciplot
+
 
 # Plot 1
 with sciplot.style():
