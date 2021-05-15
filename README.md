@@ -1,7 +1,7 @@
 # neat-sciplots
 *Neatly format Matplotlib scientific plots*
 
-**neat-sciplots** is a Python package that *neatly* formats scientific plots created with Matplotlib in a 
+**neat-sciplots** is a beta Python package that *neatly* formats scientific plots created with Matplotlib in a 
 user-friendly, yet highly customizable way.
 It makes typesetting in LaTeX possible and comes with several methods that makes plotting more 
 straightforward and less cluttered, without sacrificing full control over plot settings.
