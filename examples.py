@@ -1,12 +1,10 @@
-
-import sys
 import numpy as np
 from scipy.stats import pareto
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from pathlib import Path
 
-import sciplot.main as sciplot
+import sciplot
 
 # Plot 1
 with sciplot.style():
@@ -24,9 +22,6 @@ with sciplot.style():
                  r' with $x_\mathrm{m}=2$')
 
     line_plot = ax.plot(x, pdf.T)
-
-    #color_lst = sciplot.get_color_lst(len(line_plot))
-    #[ax.lines[i].set_color(color) for i, color in enumerate(color_lst)]
 
     label_lst = []
     for alpha in alpha_lst:
