@@ -1,0 +1,3 @@
+# Colours
+image.cmap: cubehelix # Colourmap
+axes.prop_cycle : (cycler('color', ['k', 'r', 'b', 'g', 'c', 'm', 'y']) + cycler('ls', ['-', '--', ':', '-.', '-', '--', ':'])) # Set color and style cycle
