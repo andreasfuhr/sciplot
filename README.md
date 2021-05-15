@@ -35,15 +35,24 @@ with sciplot.style():
     plt.show()
 ```
 If a LaTeX distribution is not available, `use_latex=False` must be passed as an argument to `sciplot.style()`.
-For demonstrations of plotting that covers all packages features, see either [`examples.py`](notebooks/examples.py) or [`examples.ipynb`](./notebooks/examples.ipynb) in the [`notebooks`](./notebooks) directory.
+For demonstrations of plotting that covers all packages features, see either [`examples.py`](notebooks/examples.py) 
+or [`examples.ipynb`](./notebooks/examples.ipynb) in the [`notebooks`](./notebooks) directory.
 
 ## Overview
 
 ### Key Features:
-* Implements LaTeX kernel for typesetting Matplotlib plots. A versatile preamble is included that is specifically 
+* User-friendly. A *style context manager* is used for all Matplotlib related user code and can be passed several 
+arguments to alter the look of the plot, such as:
+    * LaTeX typesetting
+    * serif or sans serif font
+    * dark mode
+    * [locale](https://docs.oracle.com/cd/E23824_01/html/E26033/glset.html) string (for correct decimal 
+    separator etc.)
+* Implements LaTeX kernel for typesetting plots. A versatile LaTeX preamble is included that is specifically 
 created and optionally editable for mathematics- and physics-oriented papers, theses and presentations.
-* Easy customization. The user is encouraged edit the accessible and highly readable YAML parameters files, whom can 
-be found with the `sciplot.get_paramters_dir()`-method
+* Easy customization. Most settings have been moved to parameters files, which are imported to the context manager and 
+configured with `matplotlibrc`. The **user is encouraged to edit** these accessible and highly readable YAML parameters
+files, whom can be found with the `sciplot.get_paramters_dir()` method.
 * Includes a set of useful methods relevant during plotting:
     * `sciplot.set_size_cm()` for setting figure sizes in centimeters
     * `sciplot.set_legend()` for customizing the content and position of plot legends
@@ -52,14 +61,15 @@ be found with the `sciplot.get_paramters_dir()`-method
 
 
 ### Disadvantages:
-* Slow. LaTeX figures can take quite some time to compile. Loading the parameters is however not known to be time 
-consuming.
+* Slow. LaTeX figures can take quite some time to compile. Loading the parameters is however not known from experience
+to be time consuming.
 * Only compatible with Python 3.7 and later. The 3.3.4 version of Matplotlib fixes several bugs that directly solves 
 some earlier issues with this package. 
 
 
-It should be noted that although this package is in many ways similar to [[1]](#1), which is a highly recommended 
-alternative, neat-sciplots has been independently developed and has a multitude of structural and functional differences.
+It should be noted that although this package is in many ways similar to [[1]](#1), which is a recommended 
+alternative approach, neat-sciplots has been independently developed and has a multitude of structural and functional 
+differences.
 
 
 ## Citing neat-plots
