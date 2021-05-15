@@ -104,8 +104,18 @@ Serif* are the only two font options for both text and mathematical notation.
 * Test suite for further code development
 * Include example plots in documentation
 * Write instructions on how to use the package
+* Add more themes. Let `sciplot.style()` take the argument `theme=str` *or* `theme=List[str]`.
 
+### Table of proposed themes:
 
+Name of theme                            | Background color | Font           | Seaborn colormap
+:--------------------------------------- | :--------------- | :------------- | :---------------
+***default***<sup id="a1">[1](#f1)</sup> | white            | CMR Sans Serif | cubehelix
+***dark***                               | black            | -              | -               
+***antique***                            | white            | Garamond       | *TBD*
+***ieee***                               | white            | Arial          | *TBD*
+
+<b id="f1">1</b>: Initialised at start of context
 ## References
 <a id="1">[1]</a>
 J.D. Garrett and H. Peng,
