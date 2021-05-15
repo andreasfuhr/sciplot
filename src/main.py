@@ -92,7 +92,7 @@ def get_parameters_lst(
 
 
 @contextlib.contextmanager
-def sciplot_style(
+def style(
         use_latex: bool = True,
         theme: str = 'light',
         font_style: str = 'sans_serif',
