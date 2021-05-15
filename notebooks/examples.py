@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from pathlib import Path
 
-import sciplot
+import sciplot.sciplot as sciplot
 
 
 # Plot 1
