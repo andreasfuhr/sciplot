@@ -7,7 +7,9 @@ It makes typesetting in LaTeX possible and comes with several methods that makes
 straightforward and less cluttered, without sacrificing full control over plot settings.
 An example of a plot created with neat-sciplots is shown below.
 
-![example image](./example_plots/Line_plot_2021-05-15T19.03.png)
+<img src="example_plots/Line_plot_2021-05-15T19.03.png" alt="example_plot" width="400"/>
+
+[example image](./example_plots/Line_plot_2021-05-15T19.03.png){ width=50% }
 
 The neat-sciplots package was developed by [Andreas Führ](https://www.linkedin.com/in/fuhrandreas/) in May 2021.
 
