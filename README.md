@@ -1,18 +1,58 @@
 # neat-sciplots
+*Neatly format Matplotlib scientific plots*
 
-The user is encouraged edit the accessible YAML parameters files, whom can be found with the 
-`sciplot.get_paramters_dir()`-method
-Advantages:
-* highly costumizable
+**neat-sciplots** is a Python package that *neatly* formats scientific plots created with Matplotlib in a 
+user-friendly, yet highly customizable way.
+It makes typesetting in LaTeX possible and comes with several methods that makes plotting more 
+straightforward and less cluttered, without sacrificing full control over plot settings.
+
+The neat-sciplots package was developed by [Andreas Führ](https://www.linkedin.com/in/fuhrandreas/) in May 2021.
+
+## Getting started
+```
+pip install neat-sciplots
+```
+
+Formatting plots in Matplotlib is based on a functional `with`-statement context
+```python
+import matplotlib.pyplot as plt
+import sciplot
+
+# Define x and y...
+
+with sciplot.style():
+    plt.plot(x, y)
+    plt.show()
+```
+
+`use_latex=False` as an argument to `sciplot.style()`
+## Overview
+
+### Key Features:
+* Implements LaTeX kernel for typesetting Matplotlib plots. A versatile preamble is included that is specifically 
+created and optionally editable for mathematics- and physics-oriented papers, theses and presentations.
+* Easy customization. The user is encouraged edit the accessible and highly readable YAML parameters files, whom can 
+be found with the `sciplot.get_paramters_dir()`-method
+* Includes a set of useful methods relevant during plotting:
+    * `sciplot.set_size_cm()` for setting figure sizes in centimeters
+    * `sciplot.set_legend()` for customizing the content and position of plot legends
+    * `sciplot.get_color_lst()` for extracting a list of colors of specified length and from a given Seaborn colormap
+    * `sciplot.save_time_stamped_figure` for saving plots in an easy manner with time stamped file names
 
 
-Disadvantages:
-* Slow
-*
+### Disadvantages:
+* Slow. LaTeX figures can take quite some time to compile. Loading the parameters is however not known to be time 
+consuming.
+* Only compatible with Python 3.7 and later. The 3.3.4 version of Matplotlib fixes several bugs that directly solves 
+some earlier issues with this package. 
 
 
-Please note that although this package is in many ways similar to [[1]](#1), it has been independently developed and has
-a multitude of structural and functional differences.
+
+
+
+
+It should be noted that although this package is in many ways similar to [[1]](#1), which is a highly recommended 
+alternative, neat-sciplots has been independently developed and has a multitude of structural and functional differences.
 
 
 ## Citing neat-plots
@@ -34,6 +74,8 @@ To cite this Python package, please use the following BibTeX citation:
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
 thankful for any recognition.
 
+
+## 
 ## References
 <a id="1">[1]</a>
 J.D. Garrett and H. Peng,
