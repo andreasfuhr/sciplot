@@ -1,8 +1,14 @@
 # neat-sciplots
 
+The user is encouraged edit the accessible YAML parameters files, whom can be found with the 
+`sciplot.get_paramters_dir()`-method
+Advantages:
 * highly costumizable
 
 
+Disadvantages:
+* Slow
+*
 
 
 Please note that although this package is in many ways similar to [[1]](#1), it has been independently developed and has
