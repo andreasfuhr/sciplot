@@ -1,1 +1,1 @@
-import sciplot.main as sciplot
+import src.main as sciplot
