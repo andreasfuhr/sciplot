@@ -22,8 +22,7 @@ setuptools.setup(
         'Framework :: Matplotlib',
         'Topic :: Scientific/Engineering'
     ],
-    package_dir={'': 'sciplot'},
-    packages=setuptools.find_packages(where='sciplot'),
+    py_modules = ['sciplot.sciplot'],
     python_requires='>=3.7',
     install_requires=['matplotlib>=3.3.4', 'pyyaml', 'seaborn'],
 )
