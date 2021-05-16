@@ -1,1 +1,1 @@
-from main import *
+from sciplot.main import *
