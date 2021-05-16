@@ -86,7 +86,7 @@ To cite this Python package, please use the following BibTeX citation:
   title        = {{andreasfuhr/neat-sciplots}},
   month        = may,
   year         = 2021,
-  version      = {0.6.9},
+  version      = {0.7.0},
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
