@@ -1,5 +1,5 @@
 # neat-sciplots
-[<img src='https://img.shields.io/pypi/v/neat-sciplots/0.6.3'>](https://pypi.org/project/neat-sciplots/)
+[<img src='https://img.shields.io/pypi/v/neat-sciplots/0.7.4'>](https://pypi.org/project/neat-sciplots/)
 
 *Neatly format Matplotlib scientific plots*
 
@@ -86,7 +86,7 @@ To cite this Python package, please use the following BibTeX citation:
   title        = {{andreasfuhr/neat-sciplots}},
   month        = may,
   year         = 2021,
-  version      = {0.7.3},
+  version      = {0.7.4},
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
