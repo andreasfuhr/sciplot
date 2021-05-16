@@ -1,5 +1,5 @@
 # neat-sciplots
-[<img src='https://img.shields.io/pypi/v/neat-sciplots/0.7.4'>](https://pypi.org/project/neat-sciplots/)
+[<img src='https://img.shields.io/pypi/v/neat-sciplots/0.7.5'>](https://pypi.org/project/neat-sciplots/)
 
 *Neatly format Matplotlib scientific plots*
 
@@ -9,8 +9,8 @@ It makes typesetting in LaTeX possible and comes with several methods that makes
 straightforward and less cluttered, without sacrificing full control over plot settings.
 Two examples plots created with neat-sciplots is shown below.
 
-<img src="example_plots/Line_plot_2021-05-15T22.57.png" alt="example_plot" width="500"/>
-<img src="example_plots/Histogram_plot_2021-05-15T22.57.png" alt="example_plot" width="800"/>
+<img src='https://github.com/andreasfuhr/neat-sciplots/blob/a27070bd4958c2240329fc4112268c698fe490ca/example_plots/Line_plot_2021-05-15T22.57.png' alt="example_plot" width="500"/>
+<img src="https://github.com/andreasfuhr/neat-sciplots/blob/a27070bd4958c2240329fc4112268c698fe490ca/example_plots/Histogram_plot_2021-05-15T22.57.png" alt="example_plot" width="800"/>
 
 The neat-sciplots package was developed by [Andreas Führ](https://www.linkedin.com/in/fuhrandreas/) in May 2021.
 
@@ -86,7 +86,7 @@ To cite this Python package, please use the following BibTeX citation:
   title        = {{andreasfuhr/neat-sciplots}},
   month        = may,
   year         = 2021,
-  version      = {0.7.4},
+  version      = {0.7.5},
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
