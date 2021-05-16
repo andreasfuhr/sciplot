@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setuptools.setup(
     name='neat-sciplots',
-    version='0.7.6',
+    version='0.7.7',
     author='Andreas Führ',
     author_email='andreas.fuhr@outlook.com',
     license='MIT',
