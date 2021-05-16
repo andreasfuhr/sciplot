@@ -39,7 +39,7 @@ def get_parameters_lst(
     # Empty list of parameters
     parameters_lst = []
 
-    parameters_dir = get_parameters_dir()
+    parameters_dir = Path(__file__).parent / 'parameters'
 
     # Import basic parameters
     try:
