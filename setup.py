@@ -24,7 +24,7 @@ setuptools.setup(
     ],
     packages=setuptools.find_packages(include=['sciplot']),
     package_dir={'': 'sciplot'},
-    package_data={'sciplot': ['parameters/*.yml', '../README.md']},
+    package_data={'package': ['parameters/*.yml'], '..': ['README.md']},
     include_package_data=True,
     python_requires='>=3.7',
     install_requires=['matplotlib>=3.3.4', 'pyyaml', 'seaborn'],
