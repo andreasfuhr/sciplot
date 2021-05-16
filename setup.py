@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setuptools.setup(
     name='neat-sciplots',
-    version='0.6.5',
+    version='0.6.6',
     author='Andreas Führ',
     author_email='andreas.fuhr@outlook.com',
     license='MIT',
@@ -22,7 +22,8 @@ setuptools.setup(
         'Framework :: Matplotlib',
         'Topic :: Scientific/Engineering'
     ],
-    packages=['sciplot'],
+    packages=['parameters'],
+    py_modules=['sciplot'],
     python_requires='>=3.7',
     install_requires=['matplotlib>=3.3.4', 'pyyaml', 'seaborn'],
 )

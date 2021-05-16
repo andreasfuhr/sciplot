@@ -28,7 +28,7 @@ class NeatSciplotsException(Exception):
 
 
 def get_parameters_dir() -> str:
-    return (Path(__file__).parent / 'parameters')
+    return str(Path(__file__).parent / 'parameters')
 
 
 def get_parameters_lst(
