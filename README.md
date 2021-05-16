@@ -28,7 +28,7 @@ pip install git+https://github.com/andreasfuhr/neat-sciplots.git
 Formatting plots in Matplotlib is based on a functional `with`-statement context. A MWE can be demonstrated as follows:
 ```python
 import matplotlib.pyplot as plt
-import sciplot.sciplot as sciplot
+import sciplot
 
 # Define x and y...
 
@@ -37,7 +37,8 @@ with sciplot.style():
     plt.show()
 ```
 If a LaTeX distribution is not available, `use_latex=False` must be passed as an argument to `sciplot.style()`.
-For demonstrations of plotting that covers all packages features, see either [`examples.py`](notebooks/examples.py) in the [`notebooks`](./notebooks) directory.
+For demonstrations of plotting that covers all packages features, see either 
+[`example_plots.py`](example_plots/example_plots.py) in the [`example_plots`](./example_plots) directory.
 
 ## Overview
 
@@ -85,7 +86,7 @@ To cite this Python package, please use the following BibTeX citation:
   title        = {{andreasfuhr/neat-sciplots}},
   month        = may,
   year         = 2021,
-  version      = {0.6.4},
+  version      = {0.7.3},
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 

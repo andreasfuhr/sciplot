@@ -1,1 +1,1 @@
-__all__ = ['sciplot']
+from sciplot.main import *

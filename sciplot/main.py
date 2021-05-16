@@ -27,8 +27,8 @@ class NeatSciplotsException(Exception):
     pass
 
 
-def get_paramters_dir() -> str:
-    return (Path(__file__).parent / 'parameters')
+def get_parameters_dir() -> str:
+    return str(Path(__file__).parent / 'parameters')
 
 
 def get_parameters_lst(
@@ -39,7 +39,7 @@ def get_parameters_lst(
     # Empty list of parameters
     parameters_lst = []
 
-    parameters_dir = get_paramters_dir()
+    parameters_dir = Path(__file__).parent / 'parameters'
 
     # Import basic parameters
     try:
