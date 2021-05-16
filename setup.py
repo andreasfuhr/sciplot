@@ -23,7 +23,6 @@ setuptools.setup(
         'Topic :: Scientific/Engineering'
     ],
     packages=setuptools.find_packages(include=['sciplot']),
-    package_dir={'': 'sciplot'},
     package_data={'sciplot': ['parameters/*.yml', '../README.md']},
     include_package_data=True,
     python_requires='>=3.7',
