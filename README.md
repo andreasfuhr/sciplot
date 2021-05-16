@@ -1,5 +1,5 @@
 # neat-sciplots
-[<img src='https://img.shields.io/pypi/v/neat-sciplots/0.6.3'>](https://pypi.org/project/neat-sciplots/)
+[<img src='https://img.shields.io/pypi/v/neat-sciplots/0.7.3'>](https://pypi.org/project/neat-sciplots/)
 
 *Neatly format Matplotlib scientific plots*
 
