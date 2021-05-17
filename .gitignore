@@ -130,4 +130,4 @@ dmypy.json
 
 # PyCharm settings
 .idea/
-example_plots/.DS_Store
+.DS_Store
