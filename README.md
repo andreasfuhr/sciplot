@@ -89,6 +89,7 @@ To cite this Python package, please use the following BibTeX citation:
   month        = may,
   year         = 2021,
   version      = {0.7.8},
+  url          = {https://github.com/andreasfuhr/neat-sciplots}
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
@@ -99,6 +100,7 @@ thankful for any recognition.
 
 The package is still in its infancy and is planned to be expanded in features and configurability. Here is a list of 
 what is in the pipeline:
+* Change name of package
 * Documentation of source code
 * Instructions on how to install a local LaTeX distribution
 * Making it possible to choose LaTeX fonts. As of currently, *Computer Modern Roman* and *Computer Modern Roman Sans 
@@ -106,7 +108,9 @@ Serif* are the only two font options for both text and mathematical notation.
 * Test suite for further code development
 * Include example plots in documentation
 * Write instructions on how to use the package
-* Add more themes. Let `sciplot.style()` take the argument `theme=str` *or* `theme=List[str]`.
+* Add themes. Let `sciplot.style()` take the argument `theme=str` *or* `theme=List[str]`. This will be a big 
+change to how the `sciplot.main` module works.
+* Add a set of *empty* themes that makes it easy for a user to add their own themes
 
 ### Table of proposed themes:
 
@@ -117,6 +121,7 @@ Name of theme                            | Priority | Background color | Font   
 ***antique***                            | low      | white            | Garamond                     | *TBD*            | -
 ***ieee_column***                        | medium   | white            | ?<sup id="a1">[2](#f2)</sup> | *TBD*            | 88 mm<sup id="a1">[3](#f3)</sup>
 ***ieee_page***                          | low      | white            | ?<sup id="a1">[2](#f2)</sup> | *TBD*            | 181 mm<sup id="a1">[3](#f3)</sup>
+***grid***                               | high
 
 <b id="f1">1</b>: Initialised at start of context.
 
