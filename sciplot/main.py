@@ -1,22 +1,21 @@
 import contextlib
+import csv
 import locale
 import logging
 import os
 import re
+import warnings
 from datetime import datetime
 from pathlib import Path
 from typing import List, Tuple, Union, OrderedDict
-import warnings
-import csv
 
 import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 import yaml
 
-
 # Reset Matplotlib style library (use in case of unresolved errors)
-#plt.style.reload_library()
+# plt.style.reload_library()
 
 # Disable "findfont: Font family ['serif'] not found. Falling back to DejaVu Sans."
 logging.getLogger('matplotlib.font_manager').disabled = True
@@ -28,6 +27,7 @@ dark_mode = False
 # sciplot warning class
 class SciplotWarning(UserWarning):
     pass
+
 
 # sciplot exception class
 class SciplotException(Exception):
@@ -144,7 +144,7 @@ def style(
 ):
     # Set locale (to get correct decimal separater etc)
     locale.setlocale(locale.LC_NUMERIC, locale_setting)
-    
+
     # Get requested themes as list
     theme_lst = _get_theme_lst(theme)
 
@@ -161,7 +161,6 @@ def style(
         for theme in theme_lst:
             if theme == theme_priority:
                 parameter_file_lst += _get_parameter_file_lst(theme)
-
 
     # Add user defined themes to parameter_file_lst
     if any(theme not in theme_priority_lst for theme in theme_lst):
@@ -205,12 +204,11 @@ def get_available_locals():
     locales_file_path = Path(__file__).parent / 'parameters' / 'locales.csv'
     with open(locales_file_path, 'r') as file:
         csv_reader = csv.reader(file, delimiter='\t')
-        print('='*89 + '\n', ' '*35, 'Available locales', ' '*35, '\n' + '='*89 + '\n')
+        print('=' * 89 + '\n', ' ' * 35, 'Available locales', ' ' * 35, '\n' + '=' * 89 + '\n')
         print('{0:<30}{1:<20}{2}'.format(*['Locale', 'Code set', 'Description']))
-        print('-'*89)
+        print('-' * 89)
         for row in csv_reader:
             print('{0:<30}{1:<20}{2}'.format(*row))
-            #print(('\t'.join(row)).expandtabs(50))
 
 
 def set_size_cm(
