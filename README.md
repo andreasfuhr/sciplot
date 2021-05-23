@@ -4,7 +4,7 @@
 
 *Format Matplotlib scientific plots*
 
-**Sciplot** is an alpha version Python package that formats scientific plots created with Matplotlib in a 
+**Sciplot** is a Python package that formats scientific plots created with Matplotlib in a 
 user-friendly, yet highly customizable way.
 It makes typesetting in LaTeX possible and comes with several methods that makes plotting more 
 straightforward and less cluttered, without sacrificing full control over plot settings.
@@ -48,7 +48,8 @@ with sciplot.style():
     plt.show()
 ```
 This produces the following output:
-<img src='https://github.com/andreasfuhr/sciplot/raw/7a1b143b5101a5e9b19f03cf654a1060a7f3a489/example_plots/MWE_plot_2021-05-23T13.33.png' alt="example_plot" width="500"/>
+
+<img src='https://github.com/andreasfuhr/sciplot/raw/7a1b143b5101a5e9b19f03cf654a1060a7f3a489/example_plots/MWE_plot_2021-05-23T13.33.png' alt="example_plot" width="300"/>
 
 
 If a LaTeX distribution is not available, `use_latex=False` must be passed as an argument to `sciplot.style()`.

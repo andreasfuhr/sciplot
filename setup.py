@@ -17,7 +17,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-        'Development Status :: 4 - Beta',
+        'Development Status :: 3 - Alpha Copy',
         'Natural Language :: English',
         'Framework :: Matplotlib',
         'Topic :: Scientific/Engineering'
