@@ -98,6 +98,10 @@ def test_get_available_locals():
     sciplot.get_available_locals()
 
 
+def test_get_matplotlibrc_reference():
+    sciplot.get_matplotlibrc_reference()
+
+
 def test_style_empty():
     x = np.linspace(0, 1, 2)
     y = 2 * x

@@ -210,6 +210,14 @@ def get_available_locals():
         for row in csv_reader:
             print('{0:<30}{1:<20}{2}'.format(*row))
 
+def get_matplotlibrc_reference():
+    locales_file_path = Path(__file__).parent / 'parameters' / 'matplotlibrc_reference.csv'
+    with open(locales_file_path, 'r') as file:
+        csv_reader = csv.reader(file, delimiter='\t')
+        print('=' * 88 + '\n', ' ' * 30, 'Matplotlib reference sheet', ' ' * 30, '\n' + '=' * 88 + '\n')
+        for row in csv_reader:
+            print(*row)
+
 
 def set_size_cm(
         width: float,
