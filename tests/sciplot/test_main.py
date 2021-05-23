@@ -1,9 +1,10 @@
-import pytest
+import locale
+import sys
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
-from pathlib import Path
-import sys
-import locale
+import pytest
 
 sys.path.append(str(Path(__file__).parent / '..' / '..'))
 import sciplot.main as sciplot
@@ -16,7 +17,7 @@ def test_get_parameters_dir():
 
 
 def test_get_theme_priority_lst():
-    theme_priority_lst= [
+    theme_priority_lst = [
         'alpha',
         'beta',
         'gamma',
@@ -32,6 +33,7 @@ def test_get_theme_priority_lst():
 def test_get_theme_lst_with_string():
     theme = 'theme'
     assert sciplot._get_theme_lst(theme) == [theme]
+
 
 def test_get_theme_lst_with_capital_string():
     theme = 'THEME'
@@ -72,10 +74,11 @@ def test_color_lst_float_color_no():
     with pytest.raises(sciplot.SciplotException):
         color_lst = sciplot.get_color_lst(color_no)
 
+
 def test_style_locale_C():
     locale = 'C'
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style(locale_setting=locale):
         plt.plot(x, y)
         plt.close()
@@ -84,44 +87,52 @@ def test_style_locale_C():
 def test_style_locale_incorrect():
     local = 'Undefined_local'
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with pytest.raises(locale.Error):
         with sciplot.style(locale_setting=local):
             plt.plot(x, y)
             plt.close()
 
 
+def test_get_available_locals():
+    sciplot.get_available_locals()
+
+
 def test_style_empty():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style():
         plt.plot(x, y)
         plt.close()
+
 
 def test_style_default():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style():
         plt.plot(x, y)
         plt.close()
 
+
 def test_style_clean():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('clean'):
         plt.plot(x, y)
         plt.close()
 
+
 def test_style_dark():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('dark'):
         plt.plot(x, y)
         plt.close()
 
+
 def test_style_serif():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('serif'):
         plt.plot(x, y)
         plt.close()
@@ -129,7 +140,7 @@ def test_style_serif():
 
 def test_style_clean_sans_serif():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style(['clean', 'sans-serif']):
         plt.plot(x, y)
         plt.close()
@@ -137,7 +148,7 @@ def test_style_clean_sans_serif():
 
 def test_style_no_latex():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('no-latex'):
         plt.plot(x, y)
         plt.close()
@@ -145,7 +156,7 @@ def test_style_no_latex():
 
 def test_style_no_latex_serif():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style(['no-latex', 'serif']):
         plt.plot(x, y)
         plt.close()
@@ -153,7 +164,7 @@ def test_style_no_latex_serif():
 
 def test_style_basic():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('basic'):
         plt.plot(x, y)
         plt.close()
@@ -161,7 +172,7 @@ def test_style_basic():
 
 def test_style_typesetting():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('typesetting'):
         plt.plot(x, y)
         plt.close()
@@ -169,7 +180,7 @@ def test_style_typesetting():
 
 def test_style_colors_light():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('colors_light'):
         plt.plot(x, y)
         plt.close()
@@ -177,7 +188,7 @@ def test_style_colors_light():
 
 def test_style_colors_dark():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('colors_dark'):
         plt.plot(x, y)
         plt.close()
@@ -185,7 +196,7 @@ def test_style_colors_dark():
 
 def test_style_fonts_cm_sans_serif():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('fonts_cm_sans_serif'):
         plt.plot(x, y)
         plt.close()
@@ -193,7 +204,7 @@ def test_style_fonts_cm_sans_serif():
 
 def test_style_fonts_cm_serif():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('fonts_cm_serif'):
         plt.plot(x, y)
         plt.close()
@@ -201,7 +212,7 @@ def test_style_fonts_cm_serif():
 
 def test_style_latex_sans_serif():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('latex_sans_serif'):
         plt.plot(x, y)
         plt.close()
@@ -209,7 +220,7 @@ def test_style_latex_sans_serif():
 
 def test_style_latex_serif():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style('latex_serif'):
         plt.plot(x, y)
         plt.close()
@@ -217,11 +228,7 @@ def test_style_latex_serif():
 
 def test_style_alpha_beta_gamma():
     x = np.linspace(0, 1, 2)
-    y = 2*x
+    y = 2 * x
     with sciplot.style(['alpha', 'beta', 'gamma']):
         plt.plot(x, y)
         plt.close()
-
-
-def test_get_available_locals():
-    sciplot.get_available_locals()
