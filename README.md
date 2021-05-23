@@ -161,7 +161,10 @@ Serif* are the only two font options for both text and mathematical notation.
 * Write instructions on how to use the package
 * Address potential issues with user defined themes and updating sciplot
 * Move sciplot methods not used by the user outside of `sciplot.main`
-
+* Create troubleshooting guide. Include:
+    * How to handle LaTeX problems
+    * Save figure BEFORE `plt.show()`
+    * How to reset Matplotlib library
 
 ### Table of proposed themes not yet implemented:
 
