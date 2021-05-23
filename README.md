@@ -114,23 +114,23 @@ with sciplot.style(theme='default', locale_setting='sv_SE.UTF-8'):
 
 #### Themes
 
-A handful of themes is bundled with Sciplot. The `theme` argument can be passed either a single theme as a string or a 
-list of theme strings. Since all themes are not mutually exclusive w.r.t. Matplotlib settings, the themes are 
+A handful of themes are bundled with Sciplot. The `theme` argument can be passed either a single theme as a *string* or
+a *list of theme strings*. Since all themes are not mutually exclusive w.r.t. Matplotlib settings, the themes are 
 segmented such that Sciplot distinguishes which style settings are more important and becomes prioritized (higher 
 number means lower priority):
 
-Priority | Theme          | Description
-:------- | :------------- | :-------------
-0        | *Custom theme* | A theme entirely made by the user. This is done by creating a parameter file in the `sciplot.parameter` directory. A theme named **my_fabulous_theme** will for example extract parameter settings from a file named `my_fabulous_theme.yml`.
-1        | **alpha**      | Predefined, contentless user theme. Intended for editing by user.
-2        | **beta**       | Predefined, contentless user theme. Intended for editing by user.
-3        | **gamma**      | Predefined, contentless user theme. Intended for editing by user.
-4        | **no-latex**   | No local LaTeX kernel is used for typesetting.
-5        | **serif**      | *Computer Modern Roman* used as text and math font, with typesetting in LaTeX.
-6        | **sans-serif** | *Computer Modern Roman Sans Serif* used as text and math font, with typesetting in LaTeX.
-7        | **dark**       | Uses Matplotlib's `dark_background` style and comes with a set of colours suitable for plotting against a black background.
-8        | **default**    | The default theme. Always active unless the **clean** "theme" is used. Initialises basic figure settings for linewidths, ticks, legends, font sizes, dpi, margins, etc. Also comes with the *cubehelix* colourmap [[2]](#2) as well as basic plot colours and styles.
-–        | **clean**      | Not technically a theme. Simpy inactivates the **default** theme.
+Priority | Theme            | Description
+:------- | :--------------- | :----------
+0        | *Custom theme*   | A theme entirely made by the user. This is done by creating a parameter file in the `sciplot.parameter` directory. A theme named **my_fabulous_theme** will for example extract parameter settings from a file named `my_fabulous_theme.yml`.
+1        | ***alpha***      | Predefined, contentless user theme. Intended for editing by user.
+2        | ***beta***       | Predefined, contentless user theme. Intended for editing by user.
+3        | ***gamma***      | Predefined, contentless user theme. Intended for editing by user.
+4        | ***no-latex***   | No local LaTeX kernel is used for typesetting.
+5        | ***serif***      | *Computer Modern Roman* used as text and math font, with typesetting in LaTeX.
+6        | ***sans-serif*** | *Computer Modern Roman Sans Serif* used as text and math font, with typesetting in LaTeX.
+7        | ***dark***       | Uses Matplotlib's `dark_background` style and comes with a set of colours suitable for plotting against a black background.
+8        | ***default***    | The default theme. Always active unless the ***clean*** "theme" is used. Initialises basic figure settings for linewidths, ticks, legends, font sizes, dpi, margins, etc. Also comes with the *cubehelix* colourmap [[2]](#2) as well as basic plot colours and styles.
+–        | ***clean***      | Not technically a theme. Simpy inactivates the ***default*** theme.
 
 
 #### Locales
@@ -185,19 +185,15 @@ Serif* are the only two font options for both text and mathematical notation.
 
 Name of theme                            | Priority | Background color | Font                         | Seaborn colormap | Figure size
 :--------------------------------------- | :------- | :--------------- | :--------------------------- | :--------------- | :----------
-***default***<sup id="a1">[1](#f1)</sup> | high     | white            | CMR Sans Serif               | cubehelix        | -
-***dark***                               | high     | black            | -                            | -                | -
 ***antique***                            | low      | white            | Garamond                     | *TBD*            | -
-***ieee_column***                        | medium   | white            | ?<sup id="a1">[2](#f2)</sup> | *TBD*            | 88 mm<sup id="a1">[3](#f3)</sup>
-***ieee_page***                          | low      | white            | ?<sup id="a1">[2](#f2)</sup> | *TBD*            | 181 mm<sup id="a1">[3](#f3)</sup>
+***ieee_column***                        | medium   | white            | ?<sup id="a1">[1](#f1)</sup> | *TBD*            | 88 mm<sup id="a1">[2](#f2)</sup>
+***ieee_page***                          | low      | white            | ?<sup id="a1">[1](#f1)</sup> | *TBD*            | 181 mm<sup id="a1">[2](#f2)</sup>
 ***grid***                               | high
 
-<b id="f1">1</b>: Initialised at start of context.
-
-<b id="f2">2</b>: One of the following Open Type fonts are suggested to be used: Times New Roman, Helvetica, Arial, 
+<b id="f1">1</b>: One of the following Open Type fonts are suggested to be used: Times New Roman, Helvetica, Arial, 
 Cambria or Symbol [[3]](#3).
 
-<b id="f3">3</b>: See [[3]](#3) for a description of sizes that graphics should be.
+<b id="f2">2</b>: See [[3]](#3) for a description of sizes that graphics should be.
 
 
 ## References
