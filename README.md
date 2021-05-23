@@ -115,12 +115,12 @@ with sciplot.style(theme='default', locale_setting='sv_SE.UTF-8'):
 #### Themes
 
 A handful of themes is bundled with Sciplot. Since all themes are not mutually exclusive w.r.t. Matplotlib settings,
-the themes are segmented so that that Sciplot uses to distinguish which style settings are more important and will be 
+the themes are segmented such that Sciplot distinguishes which style settings are more important and becomes
 prioritized (higher number means lower priority):
 
 Priority | Theme          | Description
 :------- | :------------- | :-------------
-0        | *Custom theme* | A theme entirely made by the user. This is done by creating a parameter file in the `sciplot.parameter` directory, for example `my_fabulous_theme.yml`.
+0        | *Custom theme* | A theme entirely made by the user. This is done by creating a parameter file in the `sciplot.parameter` directory. A theme named **my_fabulous_theme** will for example extract parameter settings from a file named `my_fabulous_theme.yml`.
 1        | **alpha**      | Predefined, contentless user theme. Intended for editing by user.
 2        | **beta**       | Predefined, contentless user theme. Intended for editing by user.
 3        | **gamma**      | Predefined, contentless user theme. Intended for editing by user.
@@ -137,7 +137,7 @@ Priority | Theme          | Description
 The `locale_setting` argument lets the user determine the *locale* to be used in a plot, thereby determining a set of
 parameters that defines the user's language, region and other regionally based settings and whom are used by Matplotlib
 to alter the appearance of a plot. To see all available locales, one can call the `sciplot.get_available_locals` 
-method for a printout in the console.
+method for a console printout.
 
 
 #### Code example
@@ -157,7 +157,7 @@ To cite this Python package, please use the following BibTeX citation:
 @article{Sciplot,
   author       = {Andreas H. Führ},
   title        = {{andreasfuhr/sciplot}},
-  month        = may,
+  month        = May,
   year         = 2021,
   version      = {0.8.0},
   url          = {https://github.com/andreasfuhr/sciplot}
@@ -178,6 +178,7 @@ Serif* are the only two font options for both text and mathematical notation.
 * Include more example plots in documentation
 * Write instructions on how to use the package
 * Address potentail issues with user defined themes and updating sciplot
+* Move sciplot methods not used by the user outside of ``sciplot.main``
 
 ### Table of proposed themes not yet implemented:
 
