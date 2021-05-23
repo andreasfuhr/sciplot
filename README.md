@@ -178,7 +178,7 @@ what is in the pipeline:
 Serif* are the only two font options for both text and mathematical notation.
 * Include more example plots in documentation
 * Write instructions on how to use the package
-* Address potentail issues with user defined themes and updating sciplot
+* Address potential issues with user defined themes and updating sciplot
 * Move sciplot methods not used by the user outside of `sciplot.main`
 
 ### Table of proposed themes not yet implemented:
