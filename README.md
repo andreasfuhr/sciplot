@@ -4,15 +4,13 @@
 
 *Format Matplotlib scientific plots*
 
-***This README file is outdated for version 0.8.0***
-
 
 **Sciplot** is a Python package that formats scientific plots created with Matplotlib in a 
 user-friendly, yet highly customizable way.
 It makes typesetting in LaTeX possible and comes with several methods that makes plotting more 
 straightforward and less cluttered, without sacrificing full control over plot settings.
 
-Two examples of plots that have been created with Sciplot:
+Two examples of plots created with Sciplot:
 
 <img src='https://github.com/andreasfuhr/sciplot/raw/7a1b143b5101a5e9b19f03cf654a1060a7f3a489/example_plots/Line_plot_2021-05-23T13.37.png' alt="example_plot" width="500"/>
 <img src="https://github.com/andreasfuhr/sciplot/raw/7a1b143b5101a5e9b19f03cf654a1060a7f3a489/example_plots/Histogram_plot_2021-05-23T13.38.png" alt="example_plot" width="800"/>
