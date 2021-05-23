@@ -20,6 +20,7 @@ lines.markersize : 2 # Size of plotted markers
 
 # Axes
 axes.formatter.use_locale: True # Use local decimal separator etc.
+axes.grid: False # Grid turned off
 
 # Ticks
 xtick.direction : in
