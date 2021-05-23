@@ -1,5 +1,5 @@
 # Sciplot
-[<img src='https://img.shields.io/pypi/v/sciplot/0.8.0'>](https://pypi.org/project/sciplot/) 
+[<img src='https://img.shields.io/pypi/v/sciplot/0.8.0'>](https://pypi.org/project/sciplot) 
 [<img src='https://img.shields.io/static/v1?label=repo&color=blue&style=flat&logo=github&message=v.0.8.0'>](https://github.com/andreasfuhr/sciplot)
 
 *Format Matplotlib scientific plots*
