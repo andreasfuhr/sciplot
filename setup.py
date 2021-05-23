@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setuptools.setup(
     name='Sciplot',
-    version='0.7.9',
+    version='0.8.0',
     author='Andreas Führ',
     author_email='andreas.fuhr@outlook.com',
     license='MIT',
@@ -19,7 +19,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-        'Development Status :: 3 - Alpha Copy',
+        'Development Status :: 4 - Beta',
         'Natural Language :: English',
         'Framework :: Matplotlib',
         'Topic :: Scientific/Engineering'
