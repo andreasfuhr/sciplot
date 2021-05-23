@@ -1,20 +1,21 @@
 import contextlib
+import csv
 import locale
 import logging
 import os
 import re
+import warnings
 from datetime import datetime
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Union, OrderedDict
 
 import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 import yaml
 
-
 # Reset Matplotlib style library (use in case of unresolved errors)
-#plt.style.reload_library()
+# plt.style.reload_library()
 
 # Disable "findfont: Font family ['serif'] not found. Falling back to DejaVu Sans."
 logging.getLogger('matplotlib.font_manager').disabled = True
@@ -22,108 +23,192 @@ logging.getLogger('matplotlib.font_manager').disabled = True
 # Dark mode boolean operator
 dark_mode = False
 
-# neat-sciplots exception class
-class NeatSciplotsException(Exception):
+
+# sciplot warning class
+class SciplotWarning(UserWarning):
     pass
 
 
-def get_parameters_dir() -> str:
-    return str(Path(__file__).parent / 'parameters')
+# sciplot exception class
+class SciplotException(Exception):
+    pass
 
 
-def get_parameters_lst(
-        use_latex: bool,
-        theme: str,
-        font_style: str
+def _get_theme_lst(theme_input):
+    theme_lst = []
+    if isinstance(theme_input, str):
+        theme_lst.append(theme_input)
+    elif isinstance(theme_input, list):
+        for theme in theme_input:
+            if not isinstance(theme, str):
+                raise SciplotException(
+                    "Incorrect theme input type in list for theme '" +
+                    str(theme) +
+                    "': '" +
+                    str(type(theme_input)) +
+                    "'. Correct input type is 'str'.")
+        theme_lst = theme_input
+    else:
+        raise SciplotException(
+            "Incorrect theme input type: '" +
+            str(type(theme_input)) +
+            "'. Correct input type is 'str' or 'list'.")
+
+    # Remove double entries and make theme inputs lowercase
+    theme_lst = [theme.lower() for theme in OrderedDict.fromkeys(theme_lst)]
+
+    return theme_lst
+
+
+def _get_default_theme_lst(
+        theme_lst: List[str]
+) -> List[str]:
+    if 'clean' in theme_lst:
+        if 'default' in theme_lst:
+            theme_lst.remove('default')
+
+        theme_lst.remove('clean')
+    else:
+        if not 'default' in theme_lst:
+            theme_lst.append('default')
+
+    return theme_lst
+
+
+def _get_parameter_file_lst(
+        theme: str
+) -> List[str]:
+    if theme == 'default':
+        parameter_file_lst = ['basic', 'typesetting', 'colors_light', 'fonts_cm_sans_serif', 'latex_sans_serif']
+    elif theme == 'dark':
+        plt.style.use('dark_background')
+        global dark_mode
+        dark_mode = True
+        parameter_file_lst = ['colors_dark']
+    elif theme == 'serif':
+        parameter_file_lst = ['fonts_cm_serif', 'latex_serif']
+    elif theme == 'sans-serif':
+        parameter_file_lst = ['fonts_cm_sans_serif', 'latex_sans_serif']
+    elif theme == 'no-latex':
+        parameter_file_lst = ['no_latex']
+    else:
+        parameter_file_lst = [theme]
+
+    return parameter_file_lst
+
+
+def _theme_exists(
+        theme: str
+) -> bool:
+    if not (theme in get_theme_priority_lst()):
+        try:
+            parameters_dir = Path(__file__).parent / 'parameters'
+            parameters_path = parameters_dir / (theme + '.yml')
+            with parameters_path.open():
+                pass
+            return True
+        except FileNotFoundError:
+            warnings.warn("Invalid theme ignored by Sciplot: '" + theme + "'", SciplotWarning)
+            return False
+    else:
+        return False
+
+
+def _get_parameters_lst(
+        parameter_file_lst: List[str]
 ) -> List[object]:
     # Empty list of parameters
     parameters_lst = []
 
     parameters_dir = Path(__file__).parent / 'parameters'
 
-    # Import basic parameters
-    try:
-        parameters_path = parameters_dir / 'basic.yml'
-        with parameters_path.open() as setup_file:
-            parameters = yaml.safe_load(setup_file.read())
-
-        parameters_lst.append(parameters)
-    except FileNotFoundError:
-        raise NeatSciplotsException('Could not import basic parameters')
-
-    # Import color parameters
-    try:
-        parameters_path = parameters_dir / ('colors_' + theme + '.yml')
-        with parameters_path.open() as setup_file:
-            parameters = yaml.safe_load(setup_file.read())
-
-        parameters_lst.append(parameters)
-    except FileNotFoundError:
-        raise NeatSciplotsException("No such theme: '" + theme + "'")
-
-    # Import typesetting parameters
-    try:
-        parameters_path = parameters_dir / 'typesetting.yml'
-        with parameters_path.open() as setup_file:
-            parameters = yaml.safe_load(setup_file.read())
-
-        parameters_lst.append(parameters)
-    except FileNotFoundError:
-        raise NeatSciplotsException('Could not import typesetting parameters')
-
-    # Import font parameters
-    try:
-        parameters_path = parameters_dir / ('fonts_' + font_style + '.yml')
-        with parameters_path.open() as setup_file:
-            parameters = yaml.safe_load(setup_file.read())
-
-        parameters_lst.append(parameters)
-    except FileNotFoundError:
-        raise NeatSciplotsException("No such font style: '" + font_style + "'")
-
-    # Import LaTeX parameters
-    if use_latex:
+    # Import parameters
+    for parameter_file in parameter_file_lst:
         try:
-            parameters_path = parameters_dir / ('latex_' + font_style + '.yml')
+            parameters_path = parameters_dir / (parameter_file + '.yml')
             with parameters_path.open() as setup_file:
                 parameters = yaml.safe_load(setup_file.read())
-
-            parameters_lst.append(parameters)
+                if parameters:
+                    parameters_lst.append(parameters)
         except FileNotFoundError:
-            raise NeatSciplotsException("No such font style: '" + font_style + "'")
+            raise SciplotException(
+                "Unable to import theme parameter file: '" + parameter_file + "'")
 
     return parameters_lst
 
 
 @contextlib.contextmanager
 def style(
-        use_latex: bool = True,
-        theme: str = 'light',
-        font_style: str = 'sans_serif',
+        theme: Union[str, List[str]] = 'default',
         locale_setting: str = 'sv_SE.ISO8859-1'
 ):
     # Set locale (to get correct decimal separater etc)
     locale.setlocale(locale.LC_NUMERIC, locale_setting)
 
-    if theme == 'dark':
-        plt.style.use('dark_background')
-        global dark_mode
-        dark_mode = True
-    else:
-        pass
+    # Get requested themes as list
+    theme_lst = _get_theme_lst(theme)
 
-    parameters_lst = get_parameters_lst(
-        use_latex=use_latex,
-        theme=theme,
-        font_style=font_style
-    )
+    # Get list with or without default theme
+    theme_lst = _get_default_theme_lst(theme_lst)
+
+    # Get ordered list if parameter files
+    parameter_file_lst = []
+    theme_priority_lst = get_theme_priority_lst()
+    theme_priority_lst.reverse()
+
+    # Add themes' associated parameter files to list
+    for theme_priority in theme_priority_lst:
+        for theme in theme_lst:
+            if theme == theme_priority:
+                parameter_file_lst += _get_parameter_file_lst(theme)
+
+    # Add user defined themes to parameter_file_lst
+    if any(theme not in theme_priority_lst for theme in theme_lst):
+        for theme in theme_lst:
+            if _theme_exists(theme):
+                parameter_file_lst += _get_parameter_file_lst(theme)
+
+    # Get list of parameter objects from file list
+    parameters_lst = _get_parameters_lst(parameter_file_lst)
+
+    # Set all parameters in list
     for parameters in parameters_lst:
         plt.rcParams.update(parameters)
 
     yield
 
     plt.style.use('default')
+    global dark_mode
     dark_mode = False
+
+
+def get_parameters_dir() -> str:
+    return str(Path(__file__).parent / 'parameters')
+
+
+def get_theme_priority_lst() -> List[str]:
+    theme_priority_lst = [
+        'alpha',
+        'beta',
+        'gamma',
+        'no-latex',
+        'serif',
+        'sans-serif',
+        'dark',
+        'default'
+    ]
+    return theme_priority_lst
+
+
+def get_available_locals():
+    locales_file_path = Path(__file__).parent / 'parameters' / 'locales.csv'
+    with open(locales_file_path, 'r') as file:
+        csv_reader = csv.reader(file, delimiter='\t')
+        print('=' * 89 + '\n', ' ' * 35, 'Available locales', ' ' * 35, '\n' + '=' * 89 + '\n')
+        print('{0:<30}{1:<20}{2}'.format(*['Locale', 'Code set', 'Description']))
+        print('-' * 89)
+        for row in csv_reader:
+            print('{0:<30}{1:<20}{2}'.format(*row))
 
 
 def set_size_cm(
@@ -186,6 +271,9 @@ def get_color_lst(
         seaborn_color_map: str = 'cubehelix',
         colorful: bool = False
 ) -> List[str]:
+    if color_no == 0 or not isinstance(color_no, int):
+        raise SciplotException("Invalid number of colors: '" + str(color_no) + "'")
+
     if color_no > 4 and colorful:
         color_lst = sns.color_palette(seaborn_color_map, color_no).as_hex()
     elif color_no == 1 and not dark_mode:
