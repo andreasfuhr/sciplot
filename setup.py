@@ -4,15 +4,15 @@ with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='neat-sciplots',
-    version='0.7.8',
+    name='Sciplot',
+    version='0.7.9',
     author='Andreas Führ',
     author_email='andreas.fuhr@outlook.com',
     license='MIT',
-    description='Neatly format Matplotlib scientific plots',
+    description='Format Matplotlib scientific plots',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/andreasfuhr/neat-sciplots',
+    url='https://github.com/andreasfuhr/sciplot',
     classifiers=[
         'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: MIT License',
