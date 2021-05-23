@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 import sys
+import locale
 
 sys.path.append(str(Path(__file__).parent / '..' / '..'))
 import sciplot.main as sciplot
@@ -72,12 +73,22 @@ def test_color_lst_float_color_no():
         color_lst = sciplot.get_color_lst(color_no)
 
 def test_style_locale_C():
-    local = 'C'
+    locale = 'C'
     x = np.linspace(0, 1, 2)
     y = 2*x
-    with sciplot.style(locale_setting=local):
+    with sciplot.style(locale_setting=locale):
         plt.plot(x, y)
         plt.close()
+
+
+def test_style_locale_incorrect():
+    local = 'Undefined_local'
+    x = np.linspace(0, 1, 2)
+    y = 2*x
+    with pytest.raises(locale.Error):
+        with sciplot.style(locale_setting=local):
+            plt.plot(x, y)
+            plt.close()
 
 
 def test_style_empty():
@@ -211,3 +222,6 @@ def test_style_alpha_beta_gamma():
         plt.plot(x, y)
         plt.close()
 
+
+def test_get_available_locals():
+    sciplot.get_available_locals()
