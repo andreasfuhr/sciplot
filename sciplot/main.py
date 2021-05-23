@@ -7,6 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Tuple, Union, OrderedDict
 import warnings
+import csv
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -198,6 +199,18 @@ def get_theme_priority_lst() -> List[str]:
         'default'
     ]
     return theme_priority_lst
+
+
+def get_available_locals():
+    locales_file_path = Path(__file__).parent / 'parameters' / 'locales.csv'
+    with open(locales_file_path, 'r') as file:
+        csv_reader = csv.reader(file, delimiter='\t')
+        print('='*89 + '\n', ' '*35, 'Available locales', ' '*35, '\n' + '='*89 + '\n')
+        print('{0:<30}{1:<20}{2}'.format(*['Locale', 'Code set', 'Description']))
+        print('-'*89)
+        for row in csv_reader:
+            print('{0:<30}{1:<20}{2}'.format(*row))
+            #print(('\t'.join(row)).expandtabs(50))
 
 
 def set_size_cm(
