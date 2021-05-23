@@ -148,6 +148,36 @@ with sciplot.style(['dark', 'serif'], 'en_US'):
     ...
 ```
 
+
+## Future improvements
+
+The package is still in its infancy and is planned to be expanded in features and configurability. Here is a list of 
+what is in the pipeline:
+* Documentation of source code
+* Instructions on how to install a local LaTeX distribution
+* Making it possible to choose LaTeX fonts. As of currently, *Computer Modern Roman* and *Computer Modern Roman Sans 
+Serif* are the only two font options for both text and mathematical notation.
+* Include more example plots in documentation
+* Write instructions on how to use the package
+* Address potential issues with user defined themes and updating sciplot
+* Move sciplot methods not used by the user outside of `sciplot.main`
+
+
+### Table of proposed themes not yet implemented:
+
+Name of theme                            | Priority | Background color | Font                         | Seaborn colormap | Figure size
+:--------------------------------------- | :------- | :--------------- | :--------------------------- | :--------------- | :----------
+***antique***                            | low      | white            | Garamond                     | *TBD*            | -
+***ieee_column***                        | medium   | white            | ?<sup id="a1">[1](#f1)</sup> | *TBD*            | 88 mm<sup id="a1">[2](#f2)</sup>
+***ieee_page***                          | low      | white            | ?<sup id="a1">[1](#f1)</sup> | *TBD*            | 181 mm<sup id="a1">[2](#f2)</sup>
+***grid***                               | high
+
+<b id="f1">1</b>: One of the following Open Type fonts are suggested to be used: Times New Roman, Helvetica, Arial, 
+Cambria or Symbol [[3]](#3).
+
+<b id="f2">2</b>: See [[3]](#3) for a description of sizes that graphics should be.
+
+
 ## Citing Sciplot
 
 To cite this Python package, please use the following BibTeX citation:
@@ -164,34 +194,6 @@ To cite this Python package, please use the following BibTeX citation:
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
 thankful for any recognition.
-
-
-## Future improvements
-
-The package is still in its infancy and is planned to be expanded in features and configurability. Here is a list of 
-what is in the pipeline:
-* Documentation of source code
-* Instructions on how to install a local LaTeX distribution
-* Making it possible to choose LaTeX fonts. As of currently, *Computer Modern Roman* and *Computer Modern Roman Sans 
-Serif* are the only two font options for both text and mathematical notation.
-* Include more example plots in documentation
-* Write instructions on how to use the package
-* Address potential issues with user defined themes and updating sciplot
-* Move sciplot methods not used by the user outside of `sciplot.main`
-
-### Table of proposed themes not yet implemented:
-
-Name of theme                            | Priority | Background color | Font                         | Seaborn colormap | Figure size
-:--------------------------------------- | :------- | :--------------- | :--------------------------- | :--------------- | :----------
-***antique***                            | low      | white            | Garamond                     | *TBD*            | -
-***ieee_column***                        | medium   | white            | ?<sup id="a1">[1](#f1)</sup> | *TBD*            | 88 mm<sup id="a1">[2](#f2)</sup>
-***ieee_page***                          | low      | white            | ?<sup id="a1">[1](#f1)</sup> | *TBD*            | 181 mm<sup id="a1">[2](#f2)</sup>
-***grid***                               | high
-
-<b id="f1">1</b>: One of the following Open Type fonts are suggested to be used: Times New Roman, Helvetica, Arial, 
-Cambria or Symbol [[3]](#3).
-
-<b id="f2">2</b>: See [[3]](#3) for a description of sizes that graphics should be.
 
 
 ## References
