@@ -1,7 +1,4 @@
-# 0.7.8
-
-- Added Github banner and updated image links for PyPI in README file
-
-# 0.7.7
+# 0.7.9
 
 - Alpha version.
+
