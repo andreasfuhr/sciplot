@@ -114,9 +114,10 @@ with sciplot.style(theme='default', locale_setting='sv_SE.UTF-8'):
 
 #### Themes
 
-A handful of themes is bundled with Sciplot. Since all themes are not mutually exclusive w.r.t. Matplotlib settings,
-the themes are segmented such that Sciplot distinguishes which style settings are more important and becomes
-prioritized (higher number means lower priority):
+A handful of themes is bundled with Sciplot. The `theme` argument can be passed either a single theme as a string or a 
+list of theme strings. Since all themes are not mutually exclusive w.r.t. Matplotlib settings, the themes are 
+segmented such that Sciplot distinguishes which style settings are more important and becomes prioritized (higher 
+number means lower priority):
 
 Priority | Theme          | Description
 :------- | :------------- | :-------------
@@ -129,7 +130,7 @@ Priority | Theme          | Description
 6        | **sans-serif** | *Computer Modern Roman Sans Serif* used as text and math font, with typesetting in LaTeX.
 7        | **dark**       | Uses Matplotlib's `dark_background` style and comes with a set of colours suitable for plotting against a black background.
 8        | **default**    | The default theme. Always active unless the **clean** "theme" is used. Initialises basic figure settings for linewidths, ticks, legends, font sizes, dpi, margins, etc. Also comes with the *cubehelix* colourmap [[2]](#2) as well as basic plot colours and styles.
--        | **clean**      | Not technically a theme. Simpy inactivates the **default** theme.
+–        | **clean**      | Not technically a theme. Simpy inactivates the **default** theme.
 
 
 #### Locales
@@ -145,7 +146,7 @@ method for a console printout.
 If a plot style with dark theme, LaTeX, a serif font (Computer Modern Roman) and local settings for the United States
 is requested, the style context should be initiated with
 ```Python
-with sciplot.style(['dark', 'serif'],'en_US'):
+with sciplot.style(['dark', 'serif'], 'en_US'):
     ...
 ```
 
@@ -178,7 +179,7 @@ Serif* are the only two font options for both text and mathematical notation.
 * Include more example plots in documentation
 * Write instructions on how to use the package
 * Address potentail issues with user defined themes and updating sciplot
-* Move sciplot methods not used by the user outside of ``sciplot.main``
+* Move sciplot methods not used by the user outside of `sciplot.main`
 
 ### Table of proposed themes not yet implemented:
 
