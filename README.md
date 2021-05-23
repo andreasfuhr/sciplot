@@ -129,7 +129,7 @@ Priority | Theme            | Description
 5        | ***serif***      | *Computer Modern Roman* used as text and math font, with typesetting in LaTeX.
 6        | ***sans-serif*** | *Computer Modern Roman Sans Serif* used as text and math font, with typesetting in LaTeX.
 7        | ***dark***       | Uses Matplotlib's `dark_background` style and comes with a set of colours suitable for plotting against a black background.
-8        | ***default***    | The default theme. Uses LaTeX typesetting and *Computer Modern Roman Sans Serif* as text and math font. Always active unless the ***clean*** "theme" is used. Initialises basic figure settings for linewidths, ticks, legends, font sizes, dpi, margins, etc. Also comes with the *cubehelix* colourmap [[2]](#2) as well as basic plot colours and styles.
+8        | ***default***    | The default theme. Always active unless the ***clean*** "theme" is used. Uses LaTeX typesetting and *Computer Modern Roman Sans Serif* as text and math font. Initialises basic figure settings for linewidths, ticks, legends, font sizes, dpi, margins, etc. Also comes with the *cubehelix* colourmap [[2]](#2) as well as basic plot colours and styles.
 –        | ***clean***      | Not technically a theme. Simpy inactivates the ***default*** theme.
 
 
