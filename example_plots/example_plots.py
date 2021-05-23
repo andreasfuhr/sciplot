@@ -39,7 +39,7 @@ with sciplot.style():
 
     sciplot.save_time_stamped_figure(
         plot_file_name='Line_plot',
-        save_directory=(Path(__file__).parent / '..' / 'example_plots')
+        save_directory=(Path(__file__).parent)
     )
 
     plt.show()
@@ -87,7 +87,7 @@ with sciplot.style(theme='dark', font_style='serif'):
 
     sciplot.save_time_stamped_figure(
         plot_file_name='Histogram_plot',
-        save_directory=(Path(__file__).parent / '..' / 'example_plots')
+        save_directory=(Path(__file__).parent)
     )
 
     plt.show()

@@ -1,43 +1,48 @@
-# neat-sciplots
+# Sciplot
 [<img src='https://img.shields.io/pypi/v/neat-sciplots/0.7.8'>](https://pypi.org/project/neat-sciplots/) 
 [<img src='https://img.shields.io/static/v1?label=repo&color=blue&style=flat&logo=github&message=v.0.7.8'>](https://github.com/andreasfuhr/neat-sciplots)
 
-*Neatly format Matplotlib scientific plots*
+*Format Matplotlib scientific plots*
 
-**neat-sciplots** is a beta Python package that *neatly* formats scientific plots created with Matplotlib in a 
+**Sciplot** is an alpha version Python package that formats scientific plots created with Matplotlib in a 
 user-friendly, yet highly customizable way.
 It makes typesetting in LaTeX possible and comes with several methods that makes plotting more 
 straightforward and less cluttered, without sacrificing full control over plot settings.
 
 Two examples of plots that have been created with neat-sciplots:
 
-<img src='https://github.com/andreasfuhr/neat-sciplots/raw/a27070bd4958c2240329fc4112268c698fe490ca/example_plots/Line_plot_2021-05-15T22.57.png' alt="example_plot" width="500"/>
-<img src="https://github.com/andreasfuhr/neat-sciplots/raw/a27070bd4958c2240329fc4112268c698fe490ca/example_plots/Histogram_plot_2021-05-15T22.57.png" alt="example_plot" width="800"/>
+<img src='https://github.com/andreasfuhr/sciplot/raw/a27070bd4958c2240329fc4112268c698fe490ca/example_plots/Line_plot_2021-05-15T22.57.png' alt="example_plot" width="500"/>
+<img src="https://github.com/andreasfuhr/sciplot/raw/a27070bd4958c2240329fc4112268c698fe490ca/example_plots/Histogram_plot_2021-05-15T22.57.png" alt="example_plot" width="800"/>
 
-The neat-sciplots package was developed by [Andreas Führ](https://www.linkedin.com/in/fuhrandreas/) in May 2021.
+The Sciplot package was developed by [Andreas Führ](https://www.linkedin.com/in/fuhrandreas/) in May 2021.
 
 ## Installation and getting started
 To install the latest release from PyPI, execute the following command:
 ```
-pip install neat-sciplots
+pip install sciplot
 ```
 To install the latest commit, please use the the following command:
 ```
-pip install git+https://github.com/andreasfuhr/neat-sciplots.git
+pip install git+https://github.com/andreasfuhr/sciplot.git
 ```
 
 <br/><br/>
 Formatting plots in Matplotlib is based on a functional `with`-statement context. A MWE can be demonstrated as follows:
 ```python
 import matplotlib.pyplot as plt
+import numpy as np
 import sciplot
 
-# Define x and y...
+x = np.arange(-2*np.pi, 2*np.pi, 1e-2)
+y = np.tan(x)
 
 with sciplot.style():
     plt.plot(x, y)
     plt.show()
 ```
+This produces the following output:
+
+
 If a LaTeX distribution is not available, `use_latex=False` must be passed as an argument to `sciplot.style()`.
 For demonstrations of plotting that covers all packages features, see either 
 [`example_plots.py`](example_plots/example_plots.py) in the [`example_plots`](./example_plots) directory.
@@ -89,6 +94,7 @@ To cite this Python package, please use the following BibTeX citation:
   month        = may,
   year         = 2021,
   version      = {0.7.8},
+  url          = {https://github.com/andreasfuhr/neat-sciplots}
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
@@ -99,6 +105,7 @@ thankful for any recognition.
 
 The package is still in its infancy and is planned to be expanded in features and configurability. Here is a list of 
 what is in the pipeline:
+* Change name of package
 * Documentation of source code
 * Instructions on how to install a local LaTeX distribution
 * Making it possible to choose LaTeX fonts. As of currently, *Computer Modern Roman* and *Computer Modern Roman Sans 
@@ -106,7 +113,9 @@ Serif* are the only two font options for both text and mathematical notation.
 * Test suite for further code development
 * Include example plots in documentation
 * Write instructions on how to use the package
-* Add more themes. Let `sciplot.style()` take the argument `theme=str` *or* `theme=List[str]`.
+* Add themes. Let `sciplot.style()` take the argument `theme=str` *or* `theme=List[str]`. This will be a big 
+change to how the `sciplot.main` module works.
+* Add a set of *empty* themes that makes it easy for a user to add their own themes
 
 ### Table of proposed themes:
 
@@ -117,6 +126,7 @@ Name of theme                            | Priority | Background color | Font   
 ***antique***                            | low      | white            | Garamond                     | *TBD*            | -
 ***ieee_column***                        | medium   | white            | ?<sup id="a1">[2](#f2)</sup> | *TBD*            | 88 mm<sup id="a1">[3](#f3)</sup>
 ***ieee_page***                          | low      | white            | ?<sup id="a1">[2](#f2)</sup> | *TBD*            | 181 mm<sup id="a1">[3](#f3)</sup>
+***grid***                               | high
 
 <b id="f1">1</b>: Initialised at start of context.
 
