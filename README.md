@@ -9,7 +9,7 @@ user-friendly, yet highly customizable way.
 It makes typesetting in LaTeX possible and comes with several methods that makes plotting more 
 straightforward and less cluttered, without sacrificing full control over plot settings.
 
-Two examples of plots that have been created with neat-sciplots:
+Two examples of plots that have been created with Sciplot:
 
 <img src='https://github.com/andreasfuhr/sciplot/raw/7a1b143b5101a5e9b19f03cf654a1060a7f3a489/example_plots/Line_plot_2021-05-23T13.37.png' alt="example_plot" width="500"/>
 <img src="https://github.com/andreasfuhr/sciplot/raw/7a1b143b5101a5e9b19f03cf654a1060a7f3a489/example_plots/Histogram_plot_2021-05-23T13.38.png" alt="example_plot" width="800"/>
@@ -87,22 +87,22 @@ some earlier issues with this package.
 
 
 It should be noted that although this package is in many ways similar to [[1]](#1), which is a recommended 
-alternative approach, neat-sciplots has been independently developed and has a multitude of structural and functional 
+alternative approach, Sciplot has been independently developed and has a multitude of structural and functional 
 differences.
 
 
-## Citing neat-plots
+## Citing Sciplot
 
 To cite this Python package, please use the following BibTeX citation:
 
 ```
-@article{neat-sciplots,
+@article{Sciplot,
   author       = {Andreas H. Führ},
-  title        = {{andreasfuhr/neat-sciplots}},
+  title        = {{andreasfuhr/sciplot}},
   month        = may,
   year         = 2021,
   version      = {0.7.9},
-  url          = {https://github.com/andreasfuhr/neat-sciplots}
+  url          = {https://github.com/andreasfuhr/sciplot}
 }
 ```
 Note that under the current license, citing this package is not necessary. The creator will however be happy and 
