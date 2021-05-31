@@ -161,6 +161,12 @@ Serif* are the only two font options for both text and mathematical notation.
 * Write instructions on how to use the package
 * Address potential issues with user defined themes and updating sciplot
 * Move sciplot methods not used by the user outside of `sciplot.main`
+* Change import lines in documentation to `import sciplot as sp`
+(see [example](https://sciplot.readthedocs.io/en/latest/index.html))
+* Implement logging, for example a method `setup_logging(loglevel)`
+(see [example](https://sciplot.readthedocs.io/en/latest/_modules/sciplot/skeleton.html#setup_logging))
+* Implement Matplotlib's `plt.ticklabel_format(style='sci', useMathText=True)` command, especially when `no-latex` is 
+used (see [example](https://sciplot.readthedocs.io/en/latest/_modules/sciplot/decorations.html#set_style))
 * Create troubleshooting guide. Include:
     * How to handle LaTeX problems
     * Save figure BEFORE `plt.show()`
