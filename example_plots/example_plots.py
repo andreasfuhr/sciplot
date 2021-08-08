@@ -7,7 +7,7 @@ from pathlib import Path
 import sciplot
 
 # Plot 1
-with sciplot.style():
+with sciplot.style(locale_setting='en_US.UTF-8'):
     x_m = 2  # scale
     alpha_lst = [1, 2, 3, 4]  # shape parameters
     x = np.linspace(0, 6, 1000)
@@ -46,7 +46,7 @@ with sciplot.style():
 
 
 # Plot 2
-with sciplot.style(theme='dark', font_style='serif'):
+with sciplot.style(theme='dark', locale_setting='en_US.UTF-8'):
     np.random.seed(42)
     n = 10000
     mean_ar = np.array([4.5, 6.1, 8.3])
