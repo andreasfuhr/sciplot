@@ -140,7 +140,7 @@ def _get_parameters_lst(
 @contextlib.contextmanager
 def style(
         theme: Union[str, List[str]] = 'default',
-        locale_setting: str = 'sv_SE.ISO8859-1'
+        locale_setting: str = 'sv_SE'
 ):
     # Set locale (to get correct decimal separater etc)
     locale.setlocale(locale.LC_NUMERIC, locale_setting)
