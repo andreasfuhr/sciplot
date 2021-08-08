@@ -44,5 +44,5 @@ jobs:
         sudo docker pull registry.gitlab.com/islandoftex/images/texlive:latest
         alias pdflatex='sudo docker pull registry.gitlab.com/islandoftex/images/texlive:latest'
     - name: execute example script
-        run: |
-          python example_plots/example_plots.py
+      run: |
+        python example_plots/example_plots.py
