@@ -41,4 +41,5 @@ jobs:
         alias pdflatex='sudo docker run -i --rm --name latex -v "$PWD":/usr/src/app -w /usr/src/app registry.gitlab.com/islandoftex/images/texlive:latest'
     - name: execute example script
       run: |
+        python -m pip install numpy
         python example_plots/example_plots.py
