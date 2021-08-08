@@ -44,4 +44,5 @@ jobs:
 #        pytest
     - name: execute example script
       run: |
+        export LC_ALL=C
         python example_plots/example_plots.py
