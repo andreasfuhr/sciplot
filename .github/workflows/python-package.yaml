@@ -23,7 +23,7 @@ jobs:
     - name: Install LaTeX image
       run: |
         sudo docker pull registry.gitlab.com/islandoftex/images/texlive:latest
-        alias pdflatex='sudo docker run -i --rm --name latex -v "$PWD":/usr/src/app -w /usr/src/app registry.gitlab.com/islandoftex/images/texlive:latest pdflatex'
+        echo "alias pdflatex='sudo docker run -i --rm --name latex -v "$PWD":/usr/src/app -w /usr/src/app registry.gitlab.com/islandoftex/images/texlive:latest pdflatex'" >> $GITHUB_PATH
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
