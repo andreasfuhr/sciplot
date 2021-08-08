@@ -44,5 +44,5 @@ jobs:
 #        pytest
     - name: execute example script
       run: |
-        export LC_NUMERIC=sv_SE
+        sudo update-locale LC_ALL=sv_SE.UTF-8 LANG=sv_SE.UTF-8
         python example_plots/example_plots.py
