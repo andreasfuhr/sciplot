@@ -81,7 +81,7 @@ def test_color_lst_float_color_no():
 
 @pytest.mark.mpl_image_compare
 def test_style_locale_en_US():
-    locale = 'en_US'
+    locale = 'en_US.UFT-8'
     x = np.linspace(0, 1, 2)
     y = 2 * x
     with sciplot.style(locale_setting=locale):
