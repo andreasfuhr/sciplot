@@ -1,10 +1,12 @@
 import locale
 import sys
 from pathlib import Path
-
-import matplotlib.pyplot as plt
-import numpy as np
 import pytest
+import numpy as np
+from scipy.stats import pareto
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+from pathlib import Path
 
 sys.path.append(str(Path(__file__).parent / '..' / '..'))
 import sciplot.main as sciplot
@@ -232,3 +234,84 @@ def test_style_alpha_beta_gamma():
     with sciplot.style(['alpha', 'beta', 'gamma']):
         plt.plot(x, y)
         plt.close()
+
+
+# Plot 1
+@pytest.mark.mpl_image_compare
+def test_plot_1():
+    with sciplot.style(theme='no-latex', locale_setting='en_US.UTF-8'):
+        x_m = 2  # scale
+        alpha_lst = [1, 2, 3, 4]  # shape parameters
+        x = np.linspace(0, 6, 1000)
+
+        pdf = np.array([pareto.pdf(x, scale=x_m, b=a) for a in alpha_lst])
+
+        sciplot.set_size_cm(7)
+        fig, ax = plt.subplots(1, 1)
+
+        fig.suptitle(r'Pareto PDF' +
+                     r' $p(x \,|\, x_\mathrm{m}, \alpha) = \frac{\alpha x_\mathrm{m}^\alpha}{x^{\alpha+1}}$' +
+                     r' with $x_\mathrm{m}=2$')
+
+        line_plot = ax.plot(x, pdf.T)
+
+        label_lst = []
+        for alpha in alpha_lst:
+            label_lst.append(r'$\alpha=' + str(alpha) + '$')
+
+        sciplot.set_legend(
+            ax=ax,
+            plot_tpl=line_plot,
+            label_tpl=tuple(label_lst),
+            loc='upper right'
+        )
+
+        ax.set_xlabel('$x$')
+        ax.set_ylabel(r'$p(x \,|\, x_\mathrm{m}, \alpha)$')
+
+        return fig
+
+
+# Plot 2
+@pytest.mark.mpl_image_compare
+def test_plot_2():
+    with sciplot.style(theme=['no-latex', 'dark'], locale_setting='en_US.UTF-8'):
+        np.random.seed(42)
+        n = 10000
+        mean_ar = np.array([4.5, 6.1, 8.3])
+        std_ar = np.array([0.2, 0.9, 0.5])
+        data_ar = np.array([
+            np.random.normal(mean_ar[0], std_ar[0], n),
+            np.random.normal(mean_ar[1], std_ar[1], n),
+            np.random.normal(mean_ar[2], std_ar[2], n)
+        ])
+
+        sciplot.set_size_cm(16, 8)
+        fig, ax = plt.subplots(1, 1)
+
+        fig.suptitle('Histogram of normally distributed velocities with ' + str(n) + ' samples')
+
+
+        plot_lst = []
+        color_lst = sciplot.get_color_lst(len(data_ar), seaborn_color_map='rocket', colorful=False)
+
+        for i, data in enumerate(data_ar):
+            ax.hist(data, density=True, bins=100, alpha=0.7, color=color_lst[i])
+            plot_lst.append(Rectangle((0, 0), 1, 1, color=color_lst[i], alpha=0.7))
+
+        label_lst = []
+        for i in range(len(data_ar)):
+            label_lst.append(r'$\mu=' + str(mean_ar[i]) + '$, $\sigma=' + str(std_ar[i]) + '$')
+
+        sciplot.set_legend(
+            ax=ax,
+            plot_tpl=tuple(plot_lst),
+            label_tpl=tuple(label_lst),
+            loc='lower right',
+            outside_plot=True
+        )
+
+        ax.set_xlabel('Velocity (m/s)')
+        ax.set_ylabel(r'Relative frequency')
+
+        return fig
