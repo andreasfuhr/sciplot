@@ -12,7 +12,7 @@ import locale
 sys.path.append(str(Path(__file__).parent / '..' / '..'))
 import sciplot.main as sciplot
 
-locale.setlocale(locale.LC_NUMERIC, 'en_US')
+locale.setlocale(locale.LC_NUMERIC, 'en_US.UTF-8')
 
 def test_get_parameters_dir():
     parameters_dir = str(Path(__file__).parent / '..' / '..' / 'sciplot' / 'parameters')
