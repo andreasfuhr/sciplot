@@ -38,7 +38,7 @@ jobs:
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest pytest --mpl-baseline-relative
+        pytest --mpl-baseline-relative
     - name: execute example script
       run: |
         sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
