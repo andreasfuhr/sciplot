@@ -1,0 +1,177 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+name: Release Python package
+
+jobs:
+  linting:
+    name: Lint package files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          pip install
+      - name: Python linting with Pylint
+        run: |
+          pylint `ls -R|grep .py$|xargs`
+      - name: Markdown and YAML lintning with markdownlint-cli
+          uses: nosborn/github-action-markdown-cli@v2.0.0
+          with:
+            files: .
+            config_file: .yaml
+
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        #    - name: Install LaTeX image
+        #      run: |
+        #        sudo docker pull registry.gitlab.com/islandoftex/images/texlive:latest
+        #        echo "alias pdflatex='sudo docker run -i --rm --name latex -v "$PWD":/usr/src/app -w /usr/src/app registry.gitlab.com/islandoftex/images/texlive:latest pdflatex'" >> $GITHUB_PATH
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install pylint
+            python -m pip install flake8 pytest
+            python -m pip install pytest-mpl
+            pip install -e .
+        #    - name: Lint with flake8
+        #      run: |
+        #        # stop the build if there are Python syntax errors or undefined names
+        #        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        - name: Analysing the code with pylint
+          run: |
+            pylint `ls -R|grep .py$|xargs`
+testing:
+    name: Run package tests
+    needs: linting
+    runs-on: ${{matrix.os}}
+      strategy:
+        fail-fast: true
+        matrix:
+          python-version: [3.7, 3.8, 3.9]
+          os: [ubuntu-latest, windows-latest, macos-latest]
+      steps:
+        - uses: actions/checkout@v2
+        - name: Set up Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v2
+          with:
+            python-version: ${{ matrix.python-version }}
+        #    - name: Install LaTeX image
+        #      run: |
+        #        sudo docker pull registry.gitlab.com/islandoftex/images/texlive:latest
+        #        echo "alias pdflatex='sudo docker run -i --rm --name latex -v "$PWD":/usr/src/app -w /usr/src/app registry.gitlab.com/islandoftex/images/texlive:latest pdflatex'" >> $GITHUB_PATH
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install pylint
+            python -m pip install flake8 pytest
+            python -m pip install pytest-mpl
+            pip install -e .
+        #    - name: Lint with flake8
+        #      run: |
+        #        # stop the build if there are Python syntax errors or undefined names
+        #        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        - name: Analysing the code with pylint
+          run: |
+            pylint `ls -R|grep .py$|xargs`
+        - name: Test with pytest
+          run: |
+            sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+            pytest --mpl-baseline-relative
+  release-prep:
+    name: Prepare release
+    needs: testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update version in repo
+        run: python3 update_version.py --version ${{ github.event.release.tag_name }}
+      - name: Commit files
+        run: |
+          git config --local user.name "Sciplot release workflow"
+          git add .
+          git commit -m "[RELEASE] Incremented semantic version"
+      - name: Push changes to Github
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
+    - name: Update GitHub repo version badge
+      uses: schneegans/dynamic-badges-action@v1.1.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: ae1a5002566bdc7d8d143aab72331657
+        filename: Sciplot-github-version.json
+        label: repo
+        message: ${{ github.event.release.tag_name }}
+        color: blue
+        style: flat
+        logo: github
+    - name: Update version
+    - name: Update PyPI version badge
+      uses: schneegans/dynamic-badges-action@v1.1.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: 38e0946c4456d70028d4482fe18dcc45
+        filename: Sciplot-pypi-version.json
+        label: repo
+        message: ${{ github.event.release.tag_name }}
+        color: blue
+        style: "flat
+             logo: github
+  release:
+    name: Create release
+    needs: release-prep
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+          draft: false
+          prerelease: false
+    deploy:
+      name: Publish package to PyPI
+      needs: release
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - name: Set up Python
+          uses: actions/setup-python@v1
+          with:
+            python-version: '3.x'
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install setuptools wheel twine
+        - name: Build and publish
+          env:
+            TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+            TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          run: |
+            python setup.py sdist bdist_wheel
+            twine upload dist/*
