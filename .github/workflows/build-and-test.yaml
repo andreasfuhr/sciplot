@@ -13,8 +13,10 @@ jobs:
         python-version: [3.9] #3.7, 3.8,
         os: [ubuntu-latest] #, windows-latest, macOS-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: xu-cheng/texlive-action/full@v1
+    - name: Prepare Github Actions
+      uses: actions/checkout@v2
+    - name: Install TeXLive
+      uses: xu-cheng/texlive-action/full@v1
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -26,7 +28,7 @@ jobs:
         python -m pip install flake8 pytest
         python -m pip install pytest-mpl
         pip install -e .
-    - name: Linting with flake8
+    - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
@@ -34,6 +36,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
+        sudo locale-gen en_US.UTF-8
+        sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
         pytest --mpl-baseline-relative
-
-#          sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
