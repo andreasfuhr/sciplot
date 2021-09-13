@@ -296,7 +296,7 @@ def test_plot_1():
 # Plot 2
 @pytest.mark.mpl_image_compare
 def test_plot_2():
-    with sciplot.style(theme=['latex', 'dark'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme=['dark'], locale_setting='en_US.UTF-8'):
         np.random.seed(42)
         n = 10000
         mean_ar = np.array([4.5, 6.1, 8.3])
