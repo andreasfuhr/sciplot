@@ -42,5 +42,5 @@ jobs:
       uses: xu-cheng/texlive-action/full@v1
       with:
         run: |
-          sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+#          sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
           pytest --mpl-baseline-relative
