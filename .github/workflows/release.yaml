@@ -74,8 +74,9 @@ jobs:
           git commit -m "[RELEASE] Incremented semantic version"
       - name: Push changes to Github
         uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: ${{ github.ref }}
     - name: Update GitHub repo version badge
       uses: schneegans/dynamic-badges-action@v1.1.0
       with:
