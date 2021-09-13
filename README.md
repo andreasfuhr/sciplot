@@ -1,6 +1,6 @@
 # Sciplot
 
-[<img src='https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/andreasfuhr/38e0946c4456d70028d4482fe18dcc45/raw/Sciplot-pypi-version.json'>](https://pypi.org/project/sciplot) 
+[<img src='https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/andreasfuhr/38e0946c4456d70028d4482fe18dcc45/raw/Sciplot-pypi-version.json'>](https://pypi.org/project/sciplot)
 [<img src='https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/andreasfuhr/ae1a5002566bdc7d8d143aab72331657/raw/Sciplot-github-version.json'>](https://github.com/andreasfuhr/sciplot)
 
 *Format Matplotlib scientific plots*
