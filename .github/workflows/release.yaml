@@ -102,7 +102,7 @@ jobs:
         message: ${{ github.event.release.tag_name }}
         color: blue
         style: "flat
-             logo: github
+        logo: github
   release:
     name: Create release
     needs: release-prep
