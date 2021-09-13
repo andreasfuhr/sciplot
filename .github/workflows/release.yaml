@@ -91,7 +91,6 @@ jobs:
         color: blue
         style: flat
         logo: github
-    - name: Update version
     - name: Update PyPI version badge
       uses: schneegans/dynamic-badges-action@v1.1.0
       with:
