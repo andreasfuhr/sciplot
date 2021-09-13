@@ -108,7 +108,7 @@ def test_get_available_locals():
 def test_style_empty():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme='no-latex', locale_setting='en_US.UTF-8'):
+    with sciplot.style(locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -117,7 +117,7 @@ def test_style_empty():
 def test_style_default():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme='no-latex', locale_setting='en_US.UTF-8'):
+    with sciplot.style(locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -126,7 +126,7 @@ def test_style_default():
 def test_style_clean():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'clean'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='clean', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -135,7 +135,7 @@ def test_style_clean():
 def test_style_dark():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'dark'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='dark', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -144,7 +144,7 @@ def test_style_dark():
 def test_style_serif():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'serif'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='serif', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -180,7 +180,7 @@ def test_style_no_latex_serif():
 def test_style_basic():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'basic'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='basic', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -189,7 +189,7 @@ def test_style_basic():
 def test_style_typesetting():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'typesetting'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='typesetting', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -198,7 +198,7 @@ def test_style_typesetting():
 def test_style_colors_light():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'colors_light'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='colors_light', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -207,7 +207,7 @@ def test_style_colors_light():
 def test_style_colors_dark():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'colors_dark'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='colors_dark', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -216,7 +216,7 @@ def test_style_colors_dark():
 def test_style_fonts_cm_sans_serif():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'fonts_cm_sans_serif'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='fonts_cm_sans_serif', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -225,7 +225,7 @@ def test_style_fonts_cm_sans_serif():
 def test_style_fonts_cm_serif():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'fonts_cm_serif'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='fonts_cm_serif', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -234,7 +234,7 @@ def test_style_fonts_cm_serif():
 def test_style_latex_sans_serif():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'latex_sans_serif'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='latex_sans_serif', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -243,7 +243,7 @@ def test_style_latex_sans_serif():
 def test_style_latex_serif():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(theme=['no-latex', 'latex_serif'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(theme='latex_serif', locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -252,7 +252,7 @@ def test_style_latex_serif():
 def test_style_alpha_beta_gamma():
     x = np.linspace(0, 1, 2)
     y = 2 * x
-    with sciplot.style(['no-latex', 'alpha', 'beta', 'gamma'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(['alpha', 'beta', 'gamma'], locale_setting='en_US.UTF-8'):
         plt.plot(x, y)
         return plt.gcf()
 
@@ -260,7 +260,7 @@ def test_style_alpha_beta_gamma():
 # Plot 1
 @pytest.mark.mpl_image_compare
 def test_plot_1():
-    with sciplot.style(theme='no-latex', locale_setting='en_US.UTF-8'):
+    with sciplot.style(locale_setting='en_US.UTF-8'):
         x_m = 2  # scale
         alpha_lst = [1, 2, 3, 4]  # shape parameters
         x = np.linspace(0, 6, 1000)
@@ -296,7 +296,7 @@ def test_plot_1():
 # Plot 2
 @pytest.mark.mpl_image_compare
 def test_plot_2():
-    with sciplot.style(theme=['dark'], locale_setting='en_US.UTF-8'):
+    with sciplot.style(locale_setting='en_US.UTF-8'):
         np.random.seed(42)
         n = 10000
         mean_ar = np.array([4.5, 6.1, 8.3])
