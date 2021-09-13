@@ -1,0 +1,60 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+
+name: Test Python package
+
+on: [push]
+
+jobs:
+  lint:
+    name: Lint package files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          python -m pip install flake8
+          pip install -e .
+      - name: Python linting with flake8
+        run: |
+          flake8 . --count --max-complexity=10 --max-line-length=127 --show-source --statistics --format=pylint --exit-zero
+      - name: Markdown and YAML lintning with markdownlint-cli
+        uses: nosborn/github-action-markdown-cli@v2.0.0
+        with:
+          files: .
+          config_file: .markdownlint.yaml
+  test:
+    name: Test package
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Prepare Github Actions
+      uses: actions/checkout@v2
+    - name: Install TeXLive
+      uses: xu-cheng/texlive-action/full@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install pytest
+        python -m pip install pytest-mpl
+        pip install -e .
+    - name: Test with pytest
+      run: |
+        sudo locale-gen en_US.UTF-8
+        sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+        pytest --mpl-baseline-relative

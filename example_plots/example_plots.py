@@ -7,7 +7,7 @@ from pathlib import Path
 import sciplot
 
 # Plot 1
-with sciplot.style():
+with sciplot.style(theme='no-latex', locale_setting='en_US.UTF-8'):
     x_m = 2  # scale
     alpha_lst = [1, 2, 3, 4]  # shape parameters
     x = np.linspace(0, 6, 1000)
@@ -46,7 +46,7 @@ with sciplot.style():
 
 
 # Plot 2
-with sciplot.style(theme='dark', font_style='serif'):
+with sciplot.style(theme=['no-latex', 'dark'], locale_setting='en_US.UTF-8'):
     np.random.seed(42)
     n = 10000
     mean_ar = np.array([4.5, 6.1, 8.3])
@@ -60,8 +60,7 @@ with sciplot.style(theme='dark', font_style='serif'):
     sciplot.set_size_cm(16, 8)
     fig, ax = plt.subplots(1, 1)
 
-    fig.suptitle('Histogram of normally distributed velocities with \SI{' + str(n) + '}{} samples')
-
+    fig.suptitle(r'Histogram of normally distributed velocities with \SI{' + str(n) + r'}{} samples')
 
     plot_lst = []
     color_lst = sciplot.get_color_lst(len(data_ar), seaborn_color_map='rocket', colorful=False)
@@ -72,7 +71,7 @@ with sciplot.style(theme='dark', font_style='serif'):
 
     label_lst = []
     for i in range(len(data_ar)):
-        label_lst.append(r'$\mu=\SI{' + str(mean_ar[i]) + '}{}$, $\sigma=\SI{' + str(std_ar[i]) + '}{}$')
+        label_lst.append(r'$\mu=\SI{' + str(mean_ar[i]) + r'}{}$, $\sigma=\SI{' + str(std_ar[i]) + r'}{}$')
 
     sciplot.set_legend(
         ax=ax,
@@ -82,7 +81,7 @@ with sciplot.style(theme='dark', font_style='serif'):
         outside_plot=True
     )
 
-    ax.set_xlabel('Velocity (\si{\metre\per\second})')
+    ax.set_xlabel(r'Velocity (\si{\metre\per\second})')
     ax.set_ylabel(r'Relative frequency')
 
     sciplot.save_time_stamped_figure(
