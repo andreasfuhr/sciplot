@@ -322,7 +322,7 @@ def test_plot_2():
 
         label_lst = []
         for i in range(len(data_ar)):
-            label_lst.append(r'$\mu=' + str(mean_ar[i]) + '$, $\sigma=' + str(std_ar[i]) + '$')
+            label_lst.append(r'$\mu=' + str(mean_ar[i]) + r'$, $\sigma=' + str(std_ar[i]) + r'$')
 
         sciplot.set_legend(
             ax=ax,
