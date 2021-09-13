@@ -28,13 +28,16 @@ jobs:
           files: .
           config_file: .yaml
   test:
-    runs-on: ${{matrix.os}}
+    name: Test package
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        python-version: 3.9
-        os: [ubuntu-latest]
     steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
     - name: Prepare Github Actions
       uses: actions/checkout@v2
     - name: Install TeXLive
