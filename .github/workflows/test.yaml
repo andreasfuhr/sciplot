@@ -1,17 +1,39 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 
-name: Build and test Python package
+name: Test Python package
 
 on: [push]
 
 jobs:
-  build:
+  lint:
+    name: Lint package files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          pip install
+      - name: Python linting with flake8
+        run: |
+          flake8 . --count --max-complexity=10 --max-line-length=127 --show-source --statistics --format=pylint --exit-zero
+      - name: Markdown and YAML lintning with markdownlint-cli
+        uses: nosborn/github-action-markdown-cli@v2.0.0
+        with:
+          files: .
+          config_file: .yaml
+  test:
     runs-on: ${{matrix.os}}
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.9] #3.7, 3.8,
-        os: [ubuntu-latest] #, windows-latest, macOS-latest
+        python-version: 3.9
+        os: [ubuntu-latest]
     steps:
     - name: Prepare Github Actions
       uses: actions/checkout@v2
@@ -28,12 +50,6 @@ jobs:
         python -m pip install flake8 pytest
         python -m pip install pytest-mpl
         pip install -e .
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --max-complexity=10 --max-line-length=127 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics  --select=E9,F63,F7,F82
     - name: Test with pytest
       run: |
         sudo locale-gen en_US.UTF-8
