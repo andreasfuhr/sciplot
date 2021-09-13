@@ -21,13 +21,13 @@ The Sciplot package was developed by [Andreas Führ](https://www.linkedin.com/in
 
 To install the latest release from PyPI, use the following command:
 
-```
+```bash
 pip install sciplot
 ```
 
 To install the latest commit, please use:
 
-```
+```bash
 pip install git+https://github.com/andreasfuhr/sciplot.git
 ```
 
@@ -102,14 +102,14 @@ The `sciplot.style()` context manager is the core feature of Sciplot. It is a po
 complete control of the looks of plots created with Matplotlib. The context manager operates with two input arguments:
 `theme` and `locale_setting`. By default, creating plots within the style context
 
-```Python
+```python
 with sciplot.style():
     ...
 ```
 
 is equivalent to the following style context:
 
-```Python
+```python
 with sciplot.style(theme='default', locale_setting='sv_SE.UTF-8'):
     ...
 ```
@@ -146,7 +146,7 @@ method for a console printout.
 If a plot style with dark theme, LaTeX, a serif font (Computer Modern Roman) and local settings for the United States
 is requested, the style context should be initiated with
 
-```Python
+```python
 with sciplot.style(['dark', 'serif'], 'en_US'):
     ...
 ```
@@ -182,7 +182,7 @@ Cambria or Symbol [[3]](#3).
 
 To cite this Python package, please use the following BibTeX citation:
 
-```TeX
+```tex
 @article{Sciplot,
   author       = {Andreas H. Führ},
   title        = {{andreasfuhr/sciplot}},
