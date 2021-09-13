@@ -1,10 +1,13 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions and releases the
+# package on GitHub and to PyPI. It also increments the semantic version.
+
+name: Release Python package
+
 on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-
-name: Release Python package
 
 jobs:
   lint:
