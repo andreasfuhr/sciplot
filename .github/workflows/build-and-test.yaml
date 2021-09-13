@@ -30,6 +30,7 @@ jobs:
         python -m pip install flake8 pytest
         python -m pip install pytest-mpl
         pip install -e .
+        pytest --mpl-baseline-relative
 #    - name: Lint with flake8
 #      run: |
 #        # stop the build if there are Python syntax errors or undefined names
@@ -39,8 +40,8 @@ jobs:
 #    - name: Analysing the code with pylint
 #      run: |
 #        pylint `ls -R|grep .py$|xargs`
-    - name: Test with pytest
-      run: |
-        pytest --mpl-baseline-relative
+#    - name: Test with pytest
+#      run: |
+#        pytest --mpl-baseline-relative
 
 #          sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
