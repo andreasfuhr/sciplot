@@ -33,32 +33,32 @@ jobs:
     name: Run package tests
     needs: linting
     runs-on: ${{matrix.os}}
-      strategy:
-        fail-fast: true
-        matrix:
-          python-version: [3.7, 3.8, 3.9]
-          os: [ubuntu-latest, windows-latest, macos-latest]
-      steps:
-      - name: Prepare Github Actions
-        uses: actions/checkout@v2
-      - name: Install TeXLive
-        uses: xu-cheng/texlive-action/full@v1
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pylint
-          python -m pip install flake8 pytest
-          python -m pip install pytest-mpl
-          pip install -e .
-      - name: Test with pytest
-        run: |
-          sudo locale-gen en_US.UTF-8
-          sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-          pytest --mpl-baseline-relative
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+    - name: Prepare Github Actions
+      uses: actions/checkout@v2
+    - name: Install TeXLive
+      uses: xu-cheng/texlive-action/full@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+        python -m pip install flake8 pytest
+        python -m pip install pytest-mpl
+        pip install -e .
+    - name: Test with pytest
+      run: |
+        sudo locale-gen en_US.UTF-8
+        sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+        pytest --mpl-baseline-relative
   release-prep:
     name: Prepare release
     needs: testing
