@@ -7,7 +7,7 @@ on:
 name: Release Python package
 
 jobs:
-  linting:
+  lint:
     name: Lint package files
     runs-on: ubuntu-latest
     steps:
@@ -21,41 +21,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint
           pip install
-      - name: Python linting with Pylint
+      - name: Python linting with flake8
         run: |
-          pylint `ls -R|grep .py$|xargs`
+          flake8 . --count --max-complexity=10 --max-line-length=127 --show-source --statistics --format=pylint --exit-zero
       - name: Markdown and YAML lintning with markdownlint-cli
         uses: nosborn/github-action-markdown-cli@v2.0.0
         with:
           files: .
           config_file: .yaml
-
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-        #    - name: Install LaTeX image
-        #      run: |
-        #        sudo docker pull registry.gitlab.com/islandoftex/images/texlive:latest
-        #        echo "alias pdflatex='sudo docker run -i --rm --name latex -v "$PWD":/usr/src/app -w /usr/src/app registry.gitlab.com/islandoftex/images/texlive:latest pdflatex'" >> $GITHUB_PATH
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install pylint
-            python -m pip install flake8 pytest
-            python -m pip install pytest-mpl
-            pip install -e .
-        #    - name: Lint with flake8
-        #      run: |
-        #        # stop the build if there are Python syntax errors or undefined names
-        #        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-        - name: Analysing the code with pylint
-          run: |
-            pylint `ls -R|grep .py$|xargs`
-testing:
+  test:
     name: Run package tests
     needs: linting
     runs-on: ${{matrix.os}}
@@ -65,35 +39,26 @@ testing:
           python-version: [3.7, 3.8, 3.9]
           os: [ubuntu-latest, windows-latest, macos-latest]
       steps:
-        - uses: actions/checkout@v2
-        - name: Set up Python ${{ matrix.python-version }}
-          uses: actions/setup-python@v2
-          with:
-            python-version: ${{ matrix.python-version }}
-        #    - name: Install LaTeX image
-        #      run: |
-        #        sudo docker pull registry.gitlab.com/islandoftex/images/texlive:latest
-        #        echo "alias pdflatex='sudo docker run -i --rm --name latex -v "$PWD":/usr/src/app -w /usr/src/app registry.gitlab.com/islandoftex/images/texlive:latest pdflatex'" >> $GITHUB_PATH
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install pylint
-            python -m pip install flake8 pytest
-            python -m pip install pytest-mpl
-            pip install -e .
-        #    - name: Lint with flake8
-        #      run: |
-        #        # stop the build if there are Python syntax errors or undefined names
-        #        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-        - name: Analysing the code with pylint
-          run: |
-            pylint `ls -R|grep .py$|xargs`
-        - name: Test with pytest
-          run: |
-            sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-            pytest --mpl-baseline-relative
+      - name: Prepare Github Actions
+        uses: actions/checkout@v2
+      - name: Install TeXLive
+        uses: xu-cheng/texlive-action/full@v1
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          python -m pip install flake8 pytest
+          python -m pip install pytest-mpl
+          pip install -e .
+      - name: Test with pytest
+        run: |
+          sudo locale-gen en_US.UTF-8
+          sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+          pytest --mpl-baseline-relative
   release-prep:
     name: Prepare release
     needs: testing
