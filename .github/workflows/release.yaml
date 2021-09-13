@@ -101,7 +101,7 @@ jobs:
         label: repo
         message: ${{ github.event.release.tag_name }}
         color: blue
-        style: "flat
+        style: flat
         logo: github
   release:
     name: Create release
