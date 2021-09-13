@@ -64,19 +64,19 @@ jobs:
     needs: testing
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Update version in repo
-        run: python3 update_version.py --version ${{ github.event.release.tag_name }}
-      - name: Commit files
-        run: |
-          git config --local user.name "Sciplot release workflow"
-          git add .
-          git commit -m "[RELEASE] Incremented semantic version"
-      - name: Push changes to Github
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+    - uses: actions/checkout@v2
+    - name: Update version in repo
+      run: python3 update_version.py --version ${{ github.event.release.tag_name }}
+    - name: Commit files
+      run: |
+        git config --local user.name "Sciplot release workflow"
+        git add .
+        git commit -m "[RELEASE] Incremented semantic version"
+    - name: Push changes to Github
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
     - name: Update GitHub repo version badge
       uses: schneegans/dynamic-badges-action@v1.1.0
       with:

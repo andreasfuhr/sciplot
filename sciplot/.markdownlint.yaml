@@ -1,0 +1,4 @@
+# Linting file for makrdown-cli
+default: true
+MD013: false
+MD033: false
