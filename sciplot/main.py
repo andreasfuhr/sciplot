@@ -8,7 +8,6 @@ import warnings
 from datetime import datetime
 from pathlib import Path
 from typing import List, Tuple, Union, OrderedDict
-
 import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -69,7 +68,7 @@ def _get_default_theme_lst(
 
         theme_lst.remove('clean')
     else:
-        if not 'default' in theme_lst:
+        if 'default' not in theme_lst:
             theme_lst.append('default')
 
     return theme_lst

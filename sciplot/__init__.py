@@ -1,1 +1,1 @@
-from sciplot.main import *
+from sciplot.main import *  # noqa F401

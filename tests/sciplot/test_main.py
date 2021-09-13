@@ -1,6 +1,4 @@
-import locale
 import sys
-from pathlib import Path
 import pytest
 import numpy as np
 from scipy.stats import pareto
@@ -10,9 +8,10 @@ from pathlib import Path
 import locale
 
 sys.path.append(str(Path(__file__).parent / '..' / '..'))
-import sciplot.main as sciplot
+import sciplot.main as sciplot  # noqa: E402
 
 locale.setlocale(locale.LC_NUMERIC, 'en_US.UTF-8')
+
 
 def test_get_parameters_dir():
     parameters_dir = str(Path(__file__).parent / '..' / '..' / 'sciplot' / 'parameters')
@@ -52,13 +51,13 @@ def test_get_theme_lst_with_list():
 def test_get_theme_lst_with_float():
     theme = 100.
     with pytest.raises(sciplot.SciplotException):
-        theme_lst = sciplot._get_theme_lst(theme)
+        sciplot._get_theme_lst(theme)
 
 
 def test_get_theme_lst_with_float_in_list():
     theme = ['theme1', 100.]
     with pytest.raises(sciplot.SciplotException):
-        theme_lst = sciplot._get_theme_lst(theme)
+        sciplot._get_theme_lst(theme)
 
 
 def test_color_lst_one_color():
@@ -70,23 +69,13 @@ def test_color_lst_one_color():
 def test_color_lst_zero_colors():
     color_no = 0
     with pytest.raises(sciplot.SciplotException):
-        color_lst = sciplot.get_color_lst(color_no)
+        sciplot.get_color_lst(color_no)
 
 
 def test_color_lst_float_color_no():
     color_no = 2.5
     with pytest.raises(sciplot.SciplotException):
-        color_lst = sciplot.get_color_lst(color_no)
-
-
-#@pytest.mark.mpl_image_compare
-#def test_style_locale_en_US():
-#    locale = 'en_US.UFT-8'
-#    x = np.linspace(0, 1, 2)
-#    y = 2 * x
-#    with sciplot.style(locale_setting=locale):
-#        plt.plot(x, y)
-#        return plt.gcf()
+        sciplot.get_color_lst(color_no)
 
 
 # Does not work ATM
@@ -311,7 +300,6 @@ def test_plot_2():
         fig, ax = plt.subplots(1, 1)
 
         fig.suptitle('Histogram of normally distributed velocities with ' + str(n) + ' samples')
-
 
         plot_lst = []
         color_lst = sciplot.get_color_lst(len(data_ar), seaborn_color_map='rocket', colorful=False)
