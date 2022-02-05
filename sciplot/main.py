@@ -1,5 +1,7 @@
 import contextlib
 import csv
+import glob
+import json
 import locale
 import logging
 import os
@@ -7,8 +9,9 @@ import re
 import warnings
 from datetime import datetime
 from pathlib import Path
-from typing import List, Tuple, Union, OrderedDict
-import matplotlib
+from typing import List, Tuple, Union
+
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
 import yaml
@@ -17,11 +20,25 @@ import yaml
 # plt.style.reload_library()
 
 # Disable "findfont: Font family ['serif'] not found. Falling back to DejaVu Sans."
-logging.getLogger('matplotlib.font_manager').disabled = True
+#logging.getLogger('mpl.font_manager').disabled = True
 
 # Dark mode boolean operator
 dark_mode = False
 
+# Parameter dictionary for Matplotlib RC
+RC_PARAMS = {}
+
+# List of Sciplot themes with parameters
+THEME_PARAMS = {}
+
+# List of themes with descending priority
+PRIORITY_THEME_LST = [
+        'no-latex',
+        'serif',
+        'sans-serif',
+        'dark',
+        'default'
+    ]
 
 # sciplot warning class
 class SciplotWarning(UserWarning):
@@ -33,30 +50,46 @@ class SciplotException(Exception):
     pass
 
 
-def _get_theme_lst(theme_input):
-    theme_lst = []
-    if isinstance(theme_input, str):
-        theme_lst.append(theme_input)
-    elif isinstance(theme_input, list):
-        for theme in theme_input:
-            if not isinstance(theme, str):
-                raise SciplotException(
-                    "Incorrect theme input type in list for theme '" +
-                    str(theme) +
-                    "': '" +
-                    str(type(theme_input)) +
-                    "'. Correct input type is 'str'.")
-        theme_lst = theme_input
+def _load_theme_parameters():
+    global THEME_PARAMS
+    param_filepath_general = str(Path(__file__).parent / 'parameters' / '*.yaml')
+    for param_filepath in glob.iglob(param_filepath_general):
+        with open(param_filepath, 'r') as param_file:
+            THEME_PARAMS[str(Path(param_filepath).stem)] = yaml.safe_load(param_file.read())
+
+
+def _get_theme_paramters():
+    return THEME_PARAMS
+
+
+def _parse_themes(
+    themes_input: Union[str, dict, List[str], List[dict], List[Union[str, dict]]]
+    ) -> Tuple[List[str], List[dict]]:
+    if isinstance(themes_input, str):
+        return [themes_input], None
+    elif isinstance(themes_input, dict):
+        return None, [themes_input]
+    elif isinstance(themes_input, list):
+        theme_lst = []
+        custom_param_lst = []
+        for theme in themes_input:
+            if isinstance(theme, str):
+                theme_lst.append(theme)
+            elif isinstance(theme, dict):
+                custom_param_lst.append(theme)
+            else:
+                raise SciplotException(f"Incorrect theme input type in list for themes '{theme}': {type(theme)}. "
+                                       f"Correct input types is 'str' or 'dict'.")
+
+        if not theme_lst:
+            return None, {param for param in custom_param_lst}
+        elif not custom_param_lst:
+            return list(set(themes_input)), None
+        else:
+            return list(set(themes_input)), {param for param in custom_param_lst}
     else:
-        raise SciplotException(
-            "Incorrect theme input type: '" +
-            str(type(theme_input)) +
-            "'. Correct input type is 'str' or 'list'.")
-
-    # Remove double entries and make theme inputs lowercase
-    theme_lst = [theme.lower() for theme in OrderedDict.fromkeys(theme_lst)]
-
-    return theme_lst
+        raise SciplotException(f"Incorrect theme input type: '{type(themes_input)}'. Correct input type is 'str' or "
+                               f"'list'.")
 
 
 def _get_default_theme_lst(
@@ -74,109 +107,87 @@ def _get_default_theme_lst(
     return theme_lst
 
 
-def _get_parameter_file_lst(
+def _get_theme_parameter_lst(
         theme: str
 ) -> List[str]:
     if theme == 'default':
-        parameter_file_lst = ['basic', 'typesetting', 'colors_light', 'fonts_cm_sans_serif', 'latex_sans_serif']
+        theme_param_lst = ['basic', 'typesetting', 'colors_light', 'fonts_cm_sans_serif', 'latex_sans_serif']
     elif theme == 'dark':
         plt.style.use('dark_background')
         global dark_mode
         dark_mode = True
-        parameter_file_lst = ['colors_dark']
+        theme_param_lst = ['colors_dark']
     elif theme == 'serif':
-        parameter_file_lst = ['fonts_cm_serif', 'latex_serif']
+        theme_param_lst = ['fonts_cm_serif', 'latex_serif']
     elif theme == 'sans-serif':
-        parameter_file_lst = ['fonts_cm_sans_serif', 'latex_sans_serif']
+        theme_param_lst = ['fonts_cm_sans_serif', 'latex_sans_serif']
     elif theme == 'no-latex':
-        parameter_file_lst = ['no_latex']
-    else:
-        parameter_file_lst = [theme]
+        theme_param_lst = ['no_latex']
 
-    return parameter_file_lst
+    return theme_param_lst
 
 
 def _theme_exists(
         theme: str
 ) -> bool:
-    if not (theme in get_theme_priority_lst()):
-        try:
-            parameters_dir = Path(__file__).parent / 'parameters'
-            parameters_path = parameters_dir / (theme + '.yml')
-            with parameters_path.open():
-                pass
-            return True
-        except FileNotFoundError:
-            warnings.warn("Invalid theme ignored by Sciplot: '" + theme + "'", SciplotWarning)
-            return False
-    else:
-        return False
+    return theme in PRIORITY_THEME_LST
 
 
-def _get_parameters_lst(
-        parameter_file_lst: List[str]
-) -> List[object]:
+def _get_parameters_dct(
+        prio_theme_lst: List[str]
+) -> dict:
+    tot_theme_param_lst = []
+    prio_theme_lst.reverse()
+    for theme in prio_theme_lst:
+        tot_theme_param_lst += [param for param in _get_theme_parameter_lst(theme) if param not in prio_theme_lst]
+    
     # Empty list of parameters
-    parameters_lst = []
+    parameters_dct = {}
+    for param in tot_theme_param_lst:
+        parameters_dct.update(THEME_PARAMS[param])
 
-    parameters_dir = Path(__file__).parent / 'parameters'
-
-    # Import parameters
-    for parameter_file in parameter_file_lst:
-        try:
-            parameters_path = parameters_dir / (parameter_file + '.yml')
-            with parameters_path.open() as setup_file:
-                parameters = yaml.safe_load(setup_file.read())
-                if parameters:
-                    parameters_lst.append(parameters)
-        except FileNotFoundError:
-            raise SciplotException(
-                "Unable to import theme parameter file: '" + parameter_file + "'")
-
-    return parameters_lst
+    return parameters_dct
 
 
 @contextlib.contextmanager
 def style(
-        theme: Union[str, List[str]] = 'default',
-        locale_setting: str = 'sv_SE'
+    themes: Union[str, List[str], dict] = 'default'
 ):
-    # Set locale (to get correct decimal separater etc)
-    locale.setlocale(locale.LC_NUMERIC, locale_setting)
+    parameters_dct = {}
 
-    # Get requested themes as list
-    theme_lst = _get_theme_lst(theme)
+    # Get requested themes as list and list of custom parameter dictionaries
+    theme_lst, custom_param_lst = _parse_themes(themes)
 
-    # Get list with or without default theme
-    theme_lst = _get_default_theme_lst(theme_lst)
+    if theme_lst:
+        # Get list with or without default theme
+        theme_lst = _get_default_theme_lst(theme_lst)
 
-    # Get ordered list if parameter files
-    parameter_file_lst = []
-    theme_priority_lst = get_theme_priority_lst()
-    theme_priority_lst.reverse()
-
-    # Add themes' associated parameter files to list
-    for theme_priority in theme_priority_lst:
+        # Check that themes exist
         for theme in theme_lst:
-            if theme == theme_priority:
-                parameter_file_lst += _get_parameter_file_lst(theme)
+            if not _theme_exists(theme):
+                raise SciplotException(f"Theme '{theme}' does not exist. Choose from: " + ', '.join(PRIORITY_THEME_LST))
 
-    # Add user defined themes to parameter_file_lst
-    if any(theme not in theme_priority_lst for theme in theme_lst):
-        for theme in theme_lst:
-            if _theme_exists(theme):
-                parameter_file_lst += _get_parameter_file_lst(theme)
+        # Get ordered list if parameter files
+        prio_theme_lst = [theme for theme in PRIORITY_THEME_LST if theme in theme_lst]
 
-    # Get list of parameter objects from file list
-    parameters_lst = _get_parameters_lst(parameter_file_lst)
+        # Get final dictionary of parameters from prioritized list of themes
+        parameters_dct = _get_parameters_dct(prio_theme_lst)
 
-    # Set all parameters in list
-    for parameters in parameters_lst:
-        plt.rcParams.update(parameters)
+    if custom_param_lst:
+        # Add custom theme parameters
+        for custom_param in custom_param_lst:
+            parameters_dct.update(custom_param)
 
-    yield
+    # Set global RC parameters variable
+    global RC_PARAMS
+    RC_PARAMS = parameters_dct
 
-    plt.style.use('default')
+    # Plot with temporary Matplotlib parameters
+    with mpl.rc_context(RC_PARAMS):
+        yield
+
+    # Reset global variables
+    RC_PARAMS = {}
     global dark_mode
     dark_mode = False
 
@@ -185,21 +196,7 @@ def get_parameters_dir() -> str:
     return str(Path(__file__).parent / 'parameters')
 
 
-def get_theme_priority_lst() -> List[str]:
-    theme_priority_lst = [
-        'alpha',
-        'beta',
-        'gamma',
-        'no-latex',
-        'serif',
-        'sans-serif',
-        'dark',
-        'default'
-    ]
-    return theme_priority_lst
-
-
-def get_available_locals():
+def print_locales():
     locales_file_path = Path(__file__).parent / 'parameters' / 'locales.csv'
     with open(locales_file_path, 'r') as file:
         csv_reader = csv.reader(file, delimiter='\t')
@@ -208,6 +205,14 @@ def get_available_locals():
         print('-' * 89)
         for row in csv_reader:
             print('{0:<30}{1:<20}{2}'.format(*row))
+
+def print_parameters():
+    print(json.dumps(RC_PARAMS, indent=3))
+
+
+def set_locale(locale_setting):
+    # Set locale (to get correct decimal separater etc)
+    locale.setlocale(locale.LC_NUMERIC, locale_setting)
 
 
 def set_size_cm(
@@ -222,8 +227,8 @@ def set_size_cm(
 
 
 def set_legend(
-        ax: matplotlib.axes.Axes,
-        plot_tpl: Tuple[matplotlib.artist.Artist],
+        ax: mpl.axes.Axes,
+        plot_tpl: Tuple[mpl.artist.Artist],
         label_tpl: Tuple[str],
         loc: str = 'lower left',
         outside_plot: bool = False,
@@ -307,3 +312,6 @@ def save_time_stamped_figure(
         )
 
     plt.savefig(plot_file_path, bbox_inches='tight', pad_inches=0.04)
+
+
+_load_theme_parameters()

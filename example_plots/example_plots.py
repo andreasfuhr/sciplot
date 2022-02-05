@@ -1,13 +1,18 @@
-import numpy as np
-from scipy.stats import pareto
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
 from pathlib import Path
+
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.patches import Rectangle
+from scipy.stats import pareto
 
 import sciplot
 
+sciplot.set_locale('de_DE')
+
+
 # Plot 1
-with sciplot.style(theme='no-latex', locale_setting='en_US.UTF-8'):
+with sciplot.style():
+    sciplot.print_parameters()
     x_m = 2  # scale
     alpha_lst = [1, 2, 3, 4]  # shape parameters
     x = np.linspace(0, 6, 1000)
@@ -46,7 +51,8 @@ with sciplot.style(theme='no-latex', locale_setting='en_US.UTF-8'):
 
 
 # Plot 2
-with sciplot.style(theme=['no-latex', 'dark'], locale_setting='en_US.UTF-8'):
+with sciplot.style(themes=['dark', 'serif']):
+    sciplot.print_parameters()
     np.random.seed(42)
     n = 10000
     mean_ar = np.array([4.5, 6.1, 8.3])

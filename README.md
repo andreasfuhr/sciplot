@@ -123,7 +123,7 @@ number means lower priority):
 
 Priority | Theme            | Description
 :------- | :--------------- | :----------
-0        | *Custom theme*   | A theme entirely made by the user. This is done by creating a parameter file in the `sciplot.parameter` directory. A theme named **my_fabulous_theme** will for example extract parameter settings from a file named `my_fabulous_theme.yml`.
+0        | *Custom theme*   | A theme entirely made by the user. This is done by creating a parameter file in the `sciplot.parameter` directory. A theme named **my_fabulous_theme** will for example extract parameter settings from a file named `my_fabulous_theme.yaml`.
 1        | ***alpha***      | Predefined, contentless user theme. Intended for editing by user.
 2        | ***beta***       | Predefined, contentless user theme. Intended for editing by user.
 3        | ***gamma***      | Predefined, contentless user theme. Intended for editing by user.
